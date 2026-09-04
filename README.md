@@ -1,32 +1,38 @@
-# React + TypeScript + Vite
+# Hive landing page
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Public landing page for [Hive](https://github.com/Ajanth/hive-public), the free macOS command center for OpenCode.
 
-Currently, two official plugins are available:
+The site explains how Hive turns local OpenCode history into a Board, searchable transcripts, durable context, and repository-aware delivery tools. It uses the same restrained violet and graphite visual language as the app.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+- React 19 and TypeScript
+- Vite 8
+- Tailwind CSS 4
+- shadcn/ui with Base UI primitives
+- Motion
+- Phosphor Icons
+- Geist Variable
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Development
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Use `npm run lint` and `npm run build` before publishing changes.
+
+## Product screenshots
+
+The page remains complete when screenshots are absent and shows intentional placeholders. To add current Hive captures, place WebP images at:
+
+- `public/screenshots/hive-board.webp`
+- `public/screenshots/hive-conversation.webp`
+- `public/screenshots/hive-delivery.webp`
+
+The prepared frames use cover cropping from the top edge. Capture each image with the important content away from the extreme bottom edge.
+
+## Content sources
+
+Product claims are based on the current Hive onboarding experience and product documentation. The page describes only the shipped OpenCode integration and distinguishes local built-in behavior from optional Linear and repository network activity.
