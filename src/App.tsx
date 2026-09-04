@@ -24,7 +24,7 @@ function App() {
       </a>
       <div className="min-h-[100dvh] overflow-x-clip bg-background text-foreground">
         <SiteHeader />
-        <main id="main-content">
+        <main id="main-content" tabIndex={-1}>
           <Hero />
           <Outcomes />
           <HowItWorks />

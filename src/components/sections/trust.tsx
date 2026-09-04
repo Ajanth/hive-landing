@@ -48,7 +48,7 @@ export function Trust() {
               </div>
             </div>
             <p className="local-store-visual__note">
-              Network activity is limited to updates, feedback you submit, optional Linear, explicit Git fetches, and commands you run.
+              Network use covers updates, feedback you submit, optional Linear, explicit Git fetches, GitHub CLI checks for a selected tree, and workspace commands you run.
             </p>
           </Reveal>
         </div>

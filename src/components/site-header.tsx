@@ -9,7 +9,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-4 px-4 sm:px-6 lg:px-8">
         <a
           href="#top"
-          className="flex shrink-0 items-center gap-2.5 rounded-md focus-visible:outline-none"
+          className="flex shrink-0 items-center gap-2.5 rounded-md"
           aria-label="Hive home"
         >
           <img
