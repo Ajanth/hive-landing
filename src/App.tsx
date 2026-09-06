@@ -1,43 +1,27 @@
-import { MotionConfig } from "motion/react"
+import { DownloadSimpleIcon } from "@phosphor-icons/react"
 
-import {
-  FeatureStory,
-  FinalCta,
-  Hero,
-  HowItWorks,
-  Integrations,
-  Outcomes,
-  Showcase,
-  Trust,
-} from "@/components/sections"
-import { SiteFooter } from "@/components/site-footer"
-import { SiteHeader } from "@/components/site-header"
+import { Galaxy } from "@/components/galaxy"
+import { DOWNLOAD_URL } from "@/content/landing"
 
-function App() {
+export default function App() {
   return (
-    <MotionConfig reducedMotion="user">
-      <a
-        href="#main-content"
-        className="fixed top-3 left-3 z-[100] -translate-y-20 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-transform focus:translate-y-0"
-      >
-        Skip to content
-      </a>
-      <div className="min-h-[100dvh] overflow-x-clip bg-background text-foreground">
-        <SiteHeader />
-        <main id="main-content" tabIndex={-1}>
-          <Hero />
-          <Outcomes />
-          <HowItWorks />
-          <FeatureStory />
-          <Showcase />
-          <Integrations />
-          <Trust />
-          <FinalCta />
-        </main>
-        <SiteFooter />
+    <main className="hero">
+      <div className="hero-copy">
+        <div className="wordmark">Hive</div>
+        <h1>
+          <span>Your agent work.</span>
+          <span>In one place.</span>
+        </h1>
+        <p className="hero-description">
+          A local workspace to visualize and organize your agent sessions,
+          context, and next steps.
+        </p>
+        <a className="download-button" href={DOWNLOAD_URL}>
+          <DownloadSimpleIcon size={20} aria-hidden="true" />
+          Download for macOS
+        </a>
       </div>
-    </MotionConfig>
+      <Galaxy />
+    </main>
   )
 }
-
-export default App

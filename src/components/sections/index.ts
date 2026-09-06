@@ -1,8 +1,0 @@
-export { FeatureStory } from "./feature-story"
-export { FinalCta } from "./final-cta"
-export { Hero } from "./hero"
-export { HowItWorks } from "./how-it-works"
-export { Integrations } from "./integrations"
-export { Outcomes } from "./outcomes"
-export { Showcase } from "./showcase"
-export { Trust } from "./trust"

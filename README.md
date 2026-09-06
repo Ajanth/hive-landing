@@ -1,18 +1,8 @@
 # Hive landing page
 
-Public landing page for [Hive](https://github.com/Ajanth/hive-public), the free macOS command center for OpenCode.
+A single-screen landing page for [Hive](https://github.com/Ajanth/hive-public), a local macOS workspace for visualizing and organizing agent work.
 
-The site explains how Hive turns local OpenCode history into a Board, searchable transcripts, durable context, and repository-aware delivery tools. It uses the same restrained violet and graphite visual language as the app.
-
-## Stack
-
-- React 19 and TypeScript
-- Vite 8
-- Tailwind CSS 4
-- shadcn/ui with Base UI primitives
-- Motion
-- Phosphor Icons
-- Geist Variable
+The near-black hero uses Hive's wordmark, native indigo button tokens, and a sparse Three.js galaxy. Five matte cards sit around its rim: notes, reminders, task creation, GitHub, and a miniature Kanban board. The 1,200 stars (650 on mobile) drift with steady brightness. Moving the pointer disperses nearby stars and gently repels the cards. Product positioning is agent-neutral; the page does not claim universal integration support.
 
 ## Development
 
@@ -21,18 +11,16 @@ npm install
 npm run dev
 ```
 
-Use `npm run lint` and `npm run build` before publishing changes.
+Run `npm run lint` and `npm run build` before publishing. `npm run preview` serves the production build.
 
-## Product screenshots
+## Animation
 
-The page remains complete when screenshots are absent and shows intentional placeholders. To add current Hive captures, place WebP images at:
+`src/lib/galaxy-scene.ts` owns one point cloud and one animation loop, which also steps `src/lib/feature-orbit.ts`. Star orbits and displacement run in a vertex shader. Pointer events only record coordinates; smoothing, card springs, and wake sampling run once per frame, without React renders or layout reads on mouse movement. Trail strength reaches zero before a slot is reused. Cards protect the hero text and their neighbors, and the Kanban board responds with less motion.
 
-- `public/screenshots/hive-board.webp`
-- `public/screenshots/hive-conversation.webp`
-- `public/screenshots/hive-delivery.webp`
+Three.js loads separately from the hero copy and cards. The renderer caps pixel density, pauses when the page is hidden or offscreen, and disposes its resources on unmount. Reduced motion keeps the cards still and starts with a still galaxy; the accessible Play/Pause control lets visitors choose motion. Card layout still updates on resize while paused. The desktop hero fits one viewport; mobile stacks the copy above a smaller orbit.
 
-The prepared frames use cover cropping from the top edge. Capture each image with the important content away from the extreme bottom edge.
+If WebGL is unavailable, the page shows a responsive still captured from the same scene. These fallback images only load when needed.
 
-## Content sources
+## Content
 
-Product claims are based on the current Hive onboarding experience and product documentation. The page describes only the shipped OpenCode integration and distinguishes local built-in behavior from optional Linear and repository network activity.
+Hero copy lives in `src/App.tsx`, feature content in `src/components/feature-orbit.tsx`, and the macOS download destination in `src/content/landing.ts`. It currently points to the public GitHub releases page. Replace it with the signed installer URL when a release is available.
