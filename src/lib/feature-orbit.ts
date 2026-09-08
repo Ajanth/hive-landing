@@ -2,10 +2,10 @@ type Feature = "notes" | "reminders" | "kanban" | "tasks" | "github"
 type TextBounds = Pick<DOMRect, "left" | "right" | "top" | "bottom">
 
 const DESKTOP_ANGLES: Record<Feature, number> = {
-  notes: 0, reminders: 67.5, tasks: 130, github: 305, kanban: 225,
+  kanban: 0, reminders: 67.5, tasks: 130, notes: 225, github: 305,
 }
 const MOBILE_ANGLES: Record<Feature, number> = {
-  notes: 0, reminders: 60, tasks: 120, github: 260, kanban: 180,
+  kanban: 0, reminders: 60, tasks: 120, notes: 180, github: 260,
 }
 const clamp = (value: number, low: number, high: number) =>
   Math.max(low, Math.min(high, value))
@@ -103,7 +103,7 @@ export function createFeatureOrbit(surface: HTMLElement) {
     bounds = surface.getBoundingClientRect()
     const mobile = bounds.width <= 700
     const cx = bounds.width * (mobile ? 0.5 : 0.69)
-    const cy = bounds.height * (mobile ? 0.63 : 0.5)
+    const cy = bounds.height * (mobile ? 0.67 : 0.5)
     const rx = mobile ? Math.min(95, bounds.width * 0.5 - 98) : bounds.width * 0.19
     const ry = bounds.height * (mobile ? 0.23 : 0.33)
     const angles = mobile ? MOBILE_ANGLES : DESKTOP_ANGLES

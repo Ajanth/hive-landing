@@ -94,14 +94,16 @@ button, a { -webkit-tap-highlight-color: transparent; }
   align-items: center;
   justify-content: center;
   gap: 9px;
-  min-height: 50px;
-  padding: 0 18px;
-  border: 1px solid transparent;
-  border-radius: 8px;
+  min-height: 56px;
+  padding: 0 27px;
+  border: 1px solid oklch(0.78 0.11 275 / 38%);
+  border-radius: 999px;
   color: var(--primary-foreground);
   background-color: var(--primary);
   background-image: var(--gradient-brand);
-  box-shadow: var(--shadow-brand);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 20%),
+    var(--shadow-brand);
   font-size: 19px;
   line-height: 1;
   font-weight: 700;
@@ -161,16 +163,18 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .feature-notes { --feature-color: #d8bf88; --rest-angle: -2deg; }
 .feature-reminders { --feature-color: #dba6ba; --rest-angle: 2deg; }
 .feature-kanban { width: clamp(270px, 27vw, 340px); --feature-color: #929ef2; --rest-angle: -1deg; }
-.feature-tasks { --feature-color: #8bc5ab; --rest-angle: 1.5deg; }
+.feature-tasks { width: clamp(184px, 18vw, 226px); --feature-color: #8bc5ab; --rest-angle: 1.5deg; }
+.feature-tasks h2 { white-space: nowrap; }
 .feature-github { --feature-color: #b8a5e1; --rest-angle: -1.5deg; }
 
 .mini-board {
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 8px;
+  gap: 9px;
+  margin-top: 9px;
 }
+.mini-column { min-width: 0; }
 .mini-column-label {
   display: block;
   margin-bottom: 8px;
@@ -179,19 +183,36 @@ button, a { -webkit-tap-highlight-color: transparent; }
   line-height: 1.3;
 }
 .mini-task {
+  position: relative;
   display: block;
-  min-height: 31px;
-  margin-bottom: 5px;
-  padding: 8px 7px;
-  border-radius: 4px;
-  color: #e2e2e7;
-  background: #28292f;
-  font-size: 11px;
-  line-height: 1.3;
-  white-space: nowrap;
+  height: 42px;
+  overflow: hidden;
+  border: 1px solid #aeb6ff2e;
+  border-radius: 5px;
+  background:
+    radial-gradient(circle at 24% 0%, #9ca7ff38 0%, transparent 64%),
+    linear-gradient(145deg, #30313b 0%, #25262d 70%);
+  box-shadow:
+    inset 0 1px 0 #ffffff1c,
+    inset 0 -1px 0 #00000024,
+    0 8px 18px #626bd329,
+    0 2px 5px #00000070;
 }
-
-
+.mini-column:nth-child(2) .mini-task {
+  background:
+    radial-gradient(circle at 72% 0%, #7d88ef42 0%, transparent 62%),
+    linear-gradient(155deg, #2d2f3a 0%, #222329 74%);
+  box-shadow:
+    inset 0 1px 0 #ffffff1c,
+    inset 0 -1px 0 #00000024,
+    0 8px 18px #5963d236,
+    0 2px 5px #00000070;
+}
+.mini-column:nth-child(3) .mini-task {
+  background:
+    radial-gradient(circle at 45% -8%, #c1c7ff33 0%, transparent 66%),
+    linear-gradient(145deg, #32333c 0%, #26272d 72%);
+}
 
 @media (max-width: 700px) {
   .hero { min-height: 1000px; }
@@ -208,7 +229,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
     margin: 18px 0 23px;
     font-size: 15px;
   }
-  .download-button { min-height: 48px; padding-inline: 15px; }
+  .download-button { min-height: 52px; padding-inline: 22px; }
   .feature-anchor { width: clamp(148px, 42vw, 196px); }
   .feature-card { padding: 14px; }
   .feature-kanban { width: 86%; max-width: 340px; }
@@ -227,6 +248,15 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .mini-task { padding-inline: 5px; }
 }
 
+@media (max-width: 340px) {
+  .download-button {
+    gap: 8px;
+    min-height: 50px;
+    padding-inline: 18px;
+    font-size: 17px;
+  }
+  .download-button > svg { width: 20px; height: 20px; }
+}
 
 @media (min-width: 701px) and (max-width: 760px) and (max-height: 550px) {
   .feature-kanban { width: 212px; }

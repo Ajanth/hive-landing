@@ -1,4 +1,4 @@
-import { DownloadSimpleIcon } from "@phosphor-icons/react"
+import { DesktopIcon } from "@phosphor-icons/react"
 
 import { Galaxy } from "@/components/galaxy"
 import { DOWNLOAD_URL } from "@/content/landing"
@@ -17,7 +17,7 @@ export default function App() {
           context, and next steps.
         </p>
         <a className="download-button" href={DOWNLOAD_URL}>
-          <DownloadSimpleIcon size={20} aria-hidden="true" />
+          <DesktopIcon size={22} weight="regular" aria-hidden="true" />
           Download for macOS
         </a>
       </div>

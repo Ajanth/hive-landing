@@ -27,17 +27,26 @@ export function FeatureOrbit() {
         <div className="feature-card">
           <ColumnsIcon size={18} aria-hidden="true" />
           <h2>Kanban board</h2>
-          <div className="mini-board" role="img" aria-label="Illustrative Kanban board: Search in To do, Login in Doing, Review in Done">
-            <div><span className="mini-column-label">To do</span><span className="mini-task">Search</span></div>
-            <div><span className="mini-column-label">Doing</span><span className="mini-task">Login</span></div>
-            <div><span className="mini-column-label">Done</span><span className="mini-task">Review</span></div>
+          <div className="mini-board" role="img" aria-label="Illustrative Kanban board with three task columns">
+            <div className="mini-column">
+              <span className="mini-column-label">To do</span>
+              <span className="mini-task" aria-hidden="true" />
+            </div>
+            <div className="mini-column">
+              <span className="mini-column-label">Doing</span>
+              <span className="mini-task" aria-hidden="true" />
+            </div>
+            <div className="mini-column">
+              <span className="mini-column-label">Done</span>
+              <span className="mini-task" aria-hidden="true" />
+            </div>
           </div>
         </div>
       </li>
       <li className="feature-anchor feature-tasks" data-feature="tasks" data-angle="1.5">
         <div className="feature-card">
           <PlusSquareIcon size={18} aria-hidden="true" />
-          <h2>Task creation</h2>
+          <h2>Task Management</h2>
           <p>Ideas into action.</p>
         </div>
       </li>
