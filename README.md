@@ -23,4 +23,4 @@ If WebGL is unavailable, the page shows a responsive still captured from the sam
 
 ## Content
 
-Hero copy lives in `src/App.tsx`, feature content in `src/components/feature-orbit.tsx`, and the macOS download destination in `src/content/landing.ts`. It currently points to the public GitHub releases page. Replace it with the signed installer URL when a release is available.
+Hero copy lives in `src/App.tsx` and feature content in `src/components/feature-orbit.tsx`. The download button reads the release manifest published by `hive-public`, which the Hive release workflow updates with the latest signed DMG URL after each release. The bundled `public/release.json` is the fallback while the public manifest is unavailable.
