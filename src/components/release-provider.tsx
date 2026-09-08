@@ -14,8 +14,6 @@ type ReleaseContextValue = {
 const ReleaseContext = React.createContext<ReleaseContextValue | undefined>(
   undefined,
 )
-const RELEASE_MANIFEST_URL =
-  'https://ajanth.github.io/hive-public/release.json'
 
 function parseRelease(value: unknown): Release | null {
   if (typeof value !== 'object' || value === null) {
@@ -45,37 +43,25 @@ export function ReleaseProvider({ children }: { children: React.ReactNode }) {
   React.useEffect(() => {
     const controller = new AbortController()
 
-    async function fetchRelease(url: string) {
-      const response = await fetch(url, {
-        cache: 'no-store',
-        signal: controller.signal,
-      })
-      if (!response.ok) {
-        throw new Error(`Release manifest returned ${response.status}`)
-      }
-
-      const release = parseRelease(await response.json())
-      if (!release) {
-        throw new Error('Release manifest is invalid')
-      }
-
-      return release
-    }
-
     async function loadRelease() {
-      for (const url of [RELEASE_MANIFEST_URL, '/release.json']) {
-        try {
-          const release = await fetchRelease(url)
-          setState({ isLoading: false, release })
-          return
-        } catch (error) {
-          if (error instanceof DOMException && error.name === 'AbortError') {
-            return
-          }
+      try {
+        const response = await fetch('/release.json', {
+          cache: 'no-store',
+          signal: controller.signal,
+        })
+        if (!response.ok) {
+          throw new Error(`Release manifest returned ${response.status}`)
         }
-      }
 
-      setState({ isLoading: false, release: null })
+        const release = parseRelease(await response.json())
+        setState({ isLoading: false, release })
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') {
+          return
+        }
+
+        setState({ isLoading: false, release: null })
+      }
     }
 
     void loadRelease()
