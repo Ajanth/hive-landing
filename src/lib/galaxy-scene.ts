@@ -24,7 +24,6 @@ const DESKTOP_STAR_COUNT = 1200
 const MOBILE_STAR_COUNT = 650
 
 export interface GalaxyController {
-  toggle: () => void
   dispose: () => void
 }
 
@@ -77,7 +76,6 @@ function createGeometry(count: number) {
 
 export function createGalaxy(
   canvas: HTMLCanvasElement,
-  onPlayingChange: (playing: boolean) => void,
   onFrame: (delta: number) => void,
   onUnavailableChange: (unavailable: boolean) => void,
 ): GalaxyController {
@@ -121,7 +119,6 @@ export function createGalaxy(
   let bounds = surface.getBoundingClientRect()
   let boundsDirty = false
   let playing = !reducedMotion.matches
-  let manualPlaying: boolean | null = null
   let inView = true
   let disposed = false
   let contextLost = false
@@ -249,12 +246,11 @@ export function createGalaxy(
   }
 
   function onReducedMotion() {
-    if (manualPlaying === null) playing = !reducedMotion.matches
+    playing = !reducedMotion.matches
     uniforms.uPointer.value.z = 0
     trailBirth.fill(-Infinity)
     for (const trail of trails) trail.z = 0
     if (!contextLost) renderer.render(scene, camera)
-    onPlayingChange(playing)
     syncLoop()
   }
 
@@ -288,16 +284,9 @@ export function createGalaxy(
   canvas.addEventListener("webglcontextlost", onContextLost)
   canvas.addEventListener("webglcontextrestored", onContextRestored)
   resize()
-  onPlayingChange(playing)
   syncLoop()
 
   return {
-    toggle() {
-      playing = !playing
-      manualPlaying = playing
-      onPlayingChange(playing)
-      syncLoop()
-    },
     dispose() {
       disposed = true
       cancelAnimationFrame(frameId)

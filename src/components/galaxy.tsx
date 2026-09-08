@@ -7,8 +7,6 @@ import type { GalaxyController } from "@/lib/galaxy-scene"
 export function Galaxy() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const controllerRef = useRef<GalaxyController | null>(null)
-  const [playing, setPlaying] = useState(false)
-  const [ready, setReady] = useState(false)
   const [unavailable, setUnavailable] = useState(false)
 
   useLayoutEffect(() => {
@@ -21,11 +19,9 @@ export function Galaxy() {
         if (disposed || !canvasRef.current) return
         controllerRef.current = createGalaxy(
           canvasRef.current,
-          setPlaying,
           orbit.step,
           setUnavailable,
         )
-        setReady(true)
       })
       .catch((error: unknown) => {
         if (disposed) return
@@ -51,16 +47,6 @@ export function Galaxy() {
       )}
       <canvas className="galaxy-canvas" ref={canvasRef} aria-hidden="true" />
       <FeatureOrbit />
-      {ready && (
-        <button
-          type="button"
-          className="animation-toggle"
-          aria-label={playing ? "Pause animation" : "Play animation"}
-          onClick={() => controllerRef.current?.toggle()}
-        >
-          {playing ? "Pause" : "Play"}
-        </button>
-      )}
     </div>
   )
 }

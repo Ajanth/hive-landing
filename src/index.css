@@ -191,28 +191,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
   white-space: nowrap;
 }
 
-.animation-toggle {
-  position: absolute;
-  z-index: 4;
-  left: 6.5%;
-  bottom: 8px;
-  display: grid;
-  place-items: center;
-  min-width: 44px;
-  min-height: 44px;
-  border: 0;
-  border-radius: 6px;
-  color: var(--muted-foreground);
-  background: transparent;
-  font: inherit;
-  font-size: 12px;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 150ms;
-}
 
-.hero:hover .animation-toggle,
-.hero:focus-within .animation-toggle { opacity: 1; }
 
 @media (max-width: 700px) {
   .hero { min-height: 1000px; }
@@ -233,7 +212,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .feature-anchor { width: clamp(148px, 42vw, 196px); }
   .feature-card { padding: 14px; }
   .feature-kanban { width: 86%; max-width: 340px; }
-  .animation-toggle { left: auto; right: 12px; opacity: 1; }
 }
 
 @media (min-width: 701px) and (max-height: 550px) {
@@ -249,9 +227,6 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .mini-task { padding-inline: 5px; }
 }
 
-@media (hover: none) {
-  .animation-toggle { opacity: 1; }
-}
 
 @media (min-width: 701px) and (max-width: 760px) and (max-height: 550px) {
   .feature-kanban { width: 212px; }
