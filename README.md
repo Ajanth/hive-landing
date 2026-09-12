@@ -23,4 +23,4 @@ If WebGL is unavailable, the page shows a responsive still captured from the sam
 
 ## Content
 
-Hero copy lives in `src/App.tsx` and feature content in `src/components/feature-orbit.tsx`. The download button reads `public/release.json`, which the Hive release workflow updates with the latest signed DMG URL after each release.
+Hero copy lives in `src/App.tsx` and feature content in `src/components/feature-orbit.tsx`. The download button reads the public manifest at `https://ajanth.github.io/hive-public/release.json`, which the Hive release workflow updates with the latest signed DMG URL after each release.

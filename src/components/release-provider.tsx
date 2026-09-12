@@ -1,6 +1,9 @@
 /* eslint-disable react-refresh/only-export-components */
 import * as React from 'react'
 
+const RELEASE_MANIFEST_URL =
+  'https://ajanth.github.io/hive-public/release.json'
+
 type Release = {
   version: string
   downloadUrl: string
@@ -45,7 +48,7 @@ export function ReleaseProvider({ children }: { children: React.ReactNode }) {
 
     async function loadRelease() {
       try {
-        const response = await fetch('/release.json', {
+        const response = await fetch(RELEASE_MANIFEST_URL, {
           cache: 'no-store',
           signal: controller.signal,
         })
