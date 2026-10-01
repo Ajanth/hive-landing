@@ -8,6 +8,16 @@
       content="Your agent work, in one place. Hive is a local macOS workspace to visualize and organize your agent sessions, context, and next steps."
     />
     <meta name="theme-color" content="#0b0c10" />
+    <script>
+      try {
+        const hiveTheme = localStorage.getItem('hive-theme');
+        document.documentElement.dataset.theme = hiveTheme === 'light' || hiveTheme === 'dark'
+          ? hiveTheme
+          : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      } catch {
+        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+    </script>
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Hive - Your agent work, in one place" />
     <meta
@@ -16,6 +26,7 @@
     />
     <meta name="twitter:card" content="summary" />
     <link rel="icon" type="image/png" href="/hive-favicon.png" />
+    <link rel="preload" href="/images/hive-board.webp" as="image" />
     <title>Hive - Your agent work, in one place</title>
   </head>
   <body>

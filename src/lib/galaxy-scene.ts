@@ -117,7 +117,6 @@ export function createGalaxy(
   scene.add(stars)
 
   let bounds = surface.getBoundingClientRect()
-  let boundsDirty = false
   let playing = !reducedMotion.matches
   let inView = true
   let disposed = false
@@ -147,7 +146,6 @@ export function createGalaxy(
 
   function resize() {
     bounds = surface.getBoundingClientRect()
-    boundsDirty = false
     const width = Math.max(1, bounds.width)
     const height = Math.max(1, bounds.height)
     const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
@@ -156,10 +154,10 @@ export function createGalaxy(
     camera.updateProjectionMatrix()
     uniforms.uAspect.value = camera.aspect
     uniforms.uDpr.value = dpr
-    const mobile = width <= 700
+    const mobile = width <= 767
     geometry.setDrawRange(0, mobile ? MOBILE_STAR_COUNT : DESKTOP_STAR_COUNT)
     uniforms.uMobile.value = Number(mobile)
-    uniforms.uCenter.value.set(mobile ? 0 : camera.aspect * 1.124, mobile ? -0.78 : 0)
+    uniforms.uCenter.value.set(mobile ? 0 : camera.aspect * 1.124, 0)
     uniforms.uScale.value = mobile ? 0.61 : Math.min(1.18, 0.76 + camera.aspect * 0.25)
     if (!contextLost) renderer.render(scene, camera)
   }
@@ -172,16 +170,12 @@ export function createGalaxy(
     pointerInside = true
   }
 
-  function onPointerOut(event: PointerEvent) {
-    if (!event.relatedTarget) pointerInside = false
+  function onPointerOut() {
+    pointerInside = false
   }
 
   function onBlur() {
     pointerInside = false
-  }
-
-  function onScroll() {
-    boundsDirty = true
   }
 
   function animate(now: number) {
@@ -192,10 +186,7 @@ export function createGalaxy(
     time += delta
     uniforms.uTime.value = time
     onFrame(delta)
-    if (boundsDirty) {
-      bounds = surface.getBoundingClientRect()
-      boundsDirty = false
-    }
+    if (pointerInside) bounds = surface.getBoundingClientRect()
 
     const active = pointerInside && pointerClientX >= bounds.left &&
       pointerClientX <= bounds.right && pointerClientY >= bounds.top &&
@@ -275,10 +266,9 @@ export function createGalaxy(
   })
   resizeObserver.observe(surface)
   intersectionObserver.observe(surface)
-  window.addEventListener("pointermove", onPointerMove, { passive: true })
-  window.addEventListener("pointerout", onPointerOut, { passive: true })
+  surface.addEventListener("pointermove", onPointerMove, { passive: true })
+  surface.addEventListener("pointerleave", onPointerOut, { passive: true })
   window.addEventListener("blur", onBlur)
-  window.addEventListener("scroll", onScroll, { passive: true })
   document.addEventListener("visibilitychange", syncLoop)
   reducedMotion.addEventListener("change", onReducedMotion)
   canvas.addEventListener("webglcontextlost", onContextLost)
@@ -292,10 +282,9 @@ export function createGalaxy(
       cancelAnimationFrame(frameId)
       resizeObserver.disconnect()
       intersectionObserver.disconnect()
-      window.removeEventListener("pointermove", onPointerMove)
-      window.removeEventListener("pointerout", onPointerOut)
+      surface.removeEventListener("pointermove", onPointerMove)
+      surface.removeEventListener("pointerleave", onPointerOut)
       window.removeEventListener("blur", onBlur)
-      window.removeEventListener("scroll", onScroll)
       document.removeEventListener("visibilitychange", syncLoop)
       reducedMotion.removeEventListener("change", onReducedMotion)
       canvas.removeEventListener("webglcontextlost", onContextLost)

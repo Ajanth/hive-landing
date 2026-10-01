@@ -5,7 +5,7 @@ const DESKTOP_ANGLES: Record<Feature, number> = {
   kanban: 0, reminders: 67.5, tasks: 130, notes: 225, github: 305,
 }
 const MOBILE_ANGLES: Record<Feature, number> = {
-  kanban: 0, reminders: 60, tasks: 120, notes: 180, github: 260,
+  kanban: 0, reminders: 60, tasks: 120, notes: 130, github: 230,
 }
 const clamp = (value: number, low: number, high: number) =>
   Math.max(low, Math.min(high, value))
@@ -20,12 +20,12 @@ export function createFeatureOrbit(surface: HTMLElement) {
     left: 0, top: 0, width: 0, height: 0,
     x: 0, y: 0, vx: 0, vy: 0, angle: 0, va: 0,
     tx: 0, ty: 0, ta: 0,
+    visible: true,
   }))
   const copy = surface.parentElement!.querySelector<HTMLElement>(".hero-copy")!
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)")
   let bounds = surface.getBoundingClientRect()
   let textBounds: TextBounds[] = []
-  let dirty = false
   let disposed = false
   let pointerInside = false
   let wasActive = false
@@ -36,6 +36,7 @@ export function createFeatureOrbit(surface: HTMLElement) {
   let influence = 0
 
   function keepInside(card: typeof cards[number]) {
+    if (!card.visible) return
     card.tx = clamp(card.tx, 16 - card.left, bounds.width - 16 - card.width - card.left)
     card.ty = clamp(card.ty, 16 - card.top, bounds.height - 28 - card.height - card.top)
     for (const text of textBounds) {
@@ -60,6 +61,7 @@ export function createFeatureOrbit(surface: HTMLElement) {
         for (let j = i + 1; j < cards.length; j++) {
           const a = cards[i]
           const b = cards[j]
+          if (!a.visible || !b.visible) continue
           const ax = a.left + a.tx, ay = a.top + a.ty
           const bx = b.left + b.tx, by = b.top + b.ty
           const overlapX = Math.min(ax + a.width, bx + b.width) - Math.max(ax, bx) + 12
@@ -101,16 +103,17 @@ export function createFeatureOrbit(surface: HTMLElement) {
 
   function measure() {
     bounds = surface.getBoundingClientRect()
-    const mobile = bounds.width <= 700
+    const mobile = bounds.width <= 767
     const cx = bounds.width * (mobile ? 0.5 : 0.69)
-    const cy = bounds.height * (mobile ? 0.67 : 0.5)
+    const cy = bounds.height * 0.5
     const rx = mobile ? Math.min(95, bounds.width * 0.5 - 98) : bounds.width * 0.19
-    const ry = bounds.height * (mobile ? 0.23 : 0.33)
+    const ry = bounds.height * 0.33
     const angles = mobile ? MOBILE_ANGLES : DESKTOP_ANGLES
     for (const card of cards) {
       const box = card.anchor.getBoundingClientRect()
       card.width = box.width
       card.height = box.height
+      card.visible = box.width > 0 && box.height > 0
       const angle = angles[card.feature] * Math.PI / 180
       const radius = !mobile && card.feature === "kanban" ? 1.35 : 1
       card.left = cx + Math.sin(angle) * rx * radius - card.width / 2
@@ -118,11 +121,11 @@ export function createFeatureOrbit(surface: HTMLElement) {
       card.tx = card.ty = 0
     }
     // Measure actual text lines so cards can occupy the empty space around them.
-    textBounds = Array.from(copy.querySelectorAll(".wordmark, h1 span, .hero-description, .download-button"))
+    textBounds = Array.from(copy.querySelectorAll(".hero-eyebrow, h1 span, .hero-description, .hero-actions"))
       .flatMap((element) => {
         const range = document.createRange()
         range.selectNodeContents(element)
-        const rects = element.matches(".download-button")
+        const rects = element.matches(".hero-actions")
           ? [element.getBoundingClientRect()]
           : Array.from(range.getClientRects())
         return rects.map((rect) => ({
@@ -138,7 +141,6 @@ export function createFeatureOrbit(surface: HTMLElement) {
       card.anchor.style.top = `${card.top}px`
     }
     reset()
-    dirty = false
   }
 
   function recordPointer(event: PointerEvent) {
@@ -147,19 +149,17 @@ export function createFeatureOrbit(surface: HTMLElement) {
     clientY = event.clientY
     pointerInside = true
   }
-  function leave(event: PointerEvent) { if (!event.relatedTarget) pointerInside = false }
+  function leave() { pointerInside = false }
   function blur() { pointerInside = false }
-  function markDirty() { dirty = true }
 
   // Resize immediately, even while paused or using the static WebGL fallback.
   const observer = new ResizeObserver(measure)
   observer.observe(surface)
   observer.observe(copy)
   for (const card of cards) observer.observe(card.anchor)
-  window.addEventListener("pointermove", recordPointer, { passive: true })
-  window.addEventListener("pointerout", leave, { passive: true })
+  surface.addEventListener("pointermove", recordPointer, { passive: true })
+  surface.addEventListener("pointerleave", leave, { passive: true })
   window.addEventListener("blur", blur)
-  window.addEventListener("scroll", markDirty, { passive: true })
   reducedMotion.addEventListener("change", reset)
   measure()
   void document.fonts.ready.then(() => { if (!disposed) measure() })
@@ -167,7 +167,8 @@ export function createFeatureOrbit(surface: HTMLElement) {
   return {
     step(dt: number) {
       if (disposed || reducedMotion.matches) return
-      if (dirty) measure()
+      // Only read the surface while interacting; document scrolling changes its viewport position.
+      if (pointerInside) bounds = surface.getBoundingClientRect()
       const active = pointerInside && clientX >= bounds.left && clientX <= bounds.right &&
         clientY >= bounds.top && clientY <= bounds.bottom
       if (active) {
@@ -181,9 +182,11 @@ export function createFeatureOrbit(surface: HTMLElement) {
       wasActive = active
       influence += (Number(active) - influence) * (1 - Math.exp(-dt * 9))
       const range = Math.min(225, bounds.width * 0.27)
-      const amplitude = Math.min(66, bounds.width * 0.075) * 65 / 55
+      const amplitude = Math.min(34, bounds.width * 0.04)
       for (const card of cards) {
-        const mass = card.feature === "kanban" ? 0.45 : 1
+        if (!card.visible) continue
+        // A link settles under the pointer or keyboard focus, so it is easy to activate.
+        const mass = card.plate.matches(":hover, :focus-visible") ? 0 : card.feature === "kanban" ? 0.45 : 1
         const dx = card.left + card.width / 2 - px
         const dy = card.top + card.height / 2 - py
         const d2 = dx * dx + dy * dy
@@ -215,10 +218,9 @@ export function createFeatureOrbit(surface: HTMLElement) {
     dispose() {
       disposed = true
       observer.disconnect()
-      window.removeEventListener("pointermove", recordPointer)
-      window.removeEventListener("pointerout", leave)
+      surface.removeEventListener("pointermove", recordPointer)
+      surface.removeEventListener("pointerleave", leave)
       window.removeEventListener("blur", blur)
-      window.removeEventListener("scroll", markDirty)
       reducedMotion.removeEventListener("change", reset)
     },
   }
