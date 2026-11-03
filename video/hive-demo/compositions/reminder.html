@@ -10,7 +10,7 @@
     .shot-stage { position: absolute; inset: 0; overflow: hidden; }
     .video-viewport { position: absolute; inset: 0 0 72px; overflow: hidden; background: #181818; }
     .camera-world { position: absolute; inset: 0; }
-    .source-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .source-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
     .feature-label { position: absolute; left: 64px; bottom: 16px; margin: 0; color: #C7C5CD; font-size: 36px; font-weight: 500; line-height: 1.1; letter-spacing: -0.035em; }
   </style>
   <div data-hf-id="hf-9ub2" id="root" data-composition-id="reminder" data-width="1920" data-height="1080" data-duration="2.0" data-fps="60">
@@ -24,14 +24,22 @@
     <h1 data-hf-id="hf-nigu" class="feature-label" data-var-text="reminder_label">Reminders</h1>
   </div>
   <script>
-    // Framing is editorial; the running state, messages, waveform and drop are recorded pixels.
+    // The source keeps the full application. These seek-safe camera moves restore
+    // the establish → focus → pullback language from the original product film.
     const root = document.getElementById("root");
     const world = root.querySelector(".camera-world");
-    const stage = root.querySelector(".shot-stage");
     const label = root.querySelector(".feature-label");
+    const overview = { xPercent: 0, yPercent: 0, scale: 1 };
+    const focus = (x, y, scale) => {
+      const limit = 50 * (scale - 1);
+      const clamp = value => Math.min(limit, Math.max(-limit, value));
+      return { xPercent: clamp(-(x - 50) * scale), yPercent: clamp(-(y - 50) * scale), scale };
+    };
     const tl = gsap.timeline({ paused: true });
-    tl.set(world, { xPercent: 0, yPercent: 0, scale: 1.08 }, 0);
-    tl.fromTo(world, { xPercent: 0, yPercent: 0, scale: 1.08 }, { xPercent: 0, yPercent: 0, scale: 1.0, duration: 0.24, ease: "power4.out", immediateRender: false }, 0);
+    tl.set(world, overview, 0);
+    const closeView = focus(52, 23, 2.05);
+    tl.fromTo(world, overview, { ...closeView, duration: 0.46, ease: "power2.inOut", immediateRender: false }, 0.16);
+    tl.fromTo(world, closeView, { ...overview, duration: 0.48, ease: "power2.inOut", immediateRender: false }, 1.32);
     tl.fromTo(label, { opacity: 0.5 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, 0);
     tl.to({}, { duration: 2.0 }, 0);
     window.__timelines = window.__timelines || {};

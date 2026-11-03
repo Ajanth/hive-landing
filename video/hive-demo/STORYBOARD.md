@@ -1,5 +1,7 @@
 # Storyboard
 
-Open on an actual card already being dragged and let it land in the next state. Cut immediately to a running thread with native blue progress. Move into a concise built-in Chat exchange, then match the conversation framing into Terminal Chat. Voice recording supplies the next short action. A useful note and one reminder close the loop, then the film returns straight to the opening drag.
+Open on the complete Board and keep every column visible while the card physically moves from Done to Now. Establish the full Board-plus-Terminal layout for the running thread, zoom smoothly to its blue animated progress, then pull back to the complete app. Repeat that full-app → focus → full-app camera pattern for the real built-in Chat exchange, Terminal Chat, voice recording, note and scheduled reminder.
 
-Seven beats in 14.1 seconds. No idle typing, task creation, menu tour, title card or end card. Small labels name each surface without taking attention away from the action. Every product state comes from recorded Hive pixels. Crop, trim, speed and camera anchors are explicit and editable; no interface is rebuilt in HTML.
+The note’s own Focus-mode transition is preserved; its complete native window is shown again after the editorial pullback. The reminder remains part of the full Reminders workspace, rather than an isolated card placed on a blank canvas.
+
+Seven beats remain in 14.1 seconds at 60fps. Every normalized source preserves the whole product UI; only the OS titlebar is trimmed. `object-fit: contain` preserves the complete app at overview scale. No task creation, imitation interface, permanent detail crops, title card or end card.

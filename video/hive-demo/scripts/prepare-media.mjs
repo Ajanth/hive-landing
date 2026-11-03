@@ -33,8 +33,6 @@ for (const shot of selected) {
   const source = value(`--${shot.id}`)
   const crop = value(`--${shot.id}-crop`, null)
   if (crop && !/^\d+:\d+:\d+:\d+$/.test(crop)) throw new Error(`Invalid --${shot.id}-crop; use width:height:x:y`)
-  const pad = value(`--${shot.id}-pad`, null)
-  if (pad && !/^\d+:\d+$/.test(pad)) throw new Error(`Invalid --${shot.id}-pad; use width:height`)
   const sourceStart = number(`--${shot.id}-start`, 0, 0, 86400)
   const playbackRate = number(`--${shot.id}-speed`, 1, 0.5, 3)
   const sourceWindow = shot.duration * playbackRate
@@ -46,8 +44,8 @@ for (const shot of selected) {
   if (sourceStart + sourceWindow > sourceDuration + 1 / manifest.fps) throw new Error(`${shot.id}: requested source window ${sourceStart}–${sourceStart + sourceWindow}s exceeds ${sourceDuration}s; choose a verified action window`)
   const [contentWidth, contentHeight, cropX = 0, cropY = 0] = crop ? crop.split(":").map(Number) : [picture.width, picture.height]
   if (contentWidth < 2 || contentHeight < 2 || cropX + contentWidth > picture.width || cropY + contentHeight > picture.height) throw new Error(`${shot.id}: crop exceeds source dimensions`)
-  const outputWidth = pad ? Number(pad.split(":")[0]) : 2 * Math.ceil(Math.max(contentWidth, contentHeight * 16 / 9) / 2)
-  const outputHeight = pad ? Number(pad.split(":")[1]) : 2 * Math.ceil(Math.max(contentHeight, outputWidth * 9 / 16) / 2)
+  const outputWidth = 2 * Math.ceil(Math.max(contentWidth, contentHeight * 16 / 9) / 2)
+  const outputHeight = 2 * Math.ceil(Math.max(contentHeight, outputWidth * 9 / 16) / 2)
   if (outputWidth < contentWidth || outputHeight < contentHeight || outputWidth % 2 || outputHeight % 2) throw new Error(`${shot.id}: padding must have even dimensions and contain the complete crop`)
   const output = path.join(outputDir, `${shot.id}.mp4`)
   const filters = [crop ? `crop=${crop}` : null, `setpts=(PTS-STARTPTS)/${playbackRate}`, `pad=${outputWidth}:${outputHeight}:(ow-iw)/2:(oh-ih)/2:color=0x181818`, `fps=${manifest.fps}`].filter(Boolean).join(",")
@@ -55,7 +53,7 @@ for (const shot of selected) {
   const normalizedProbe = JSON.parse(execFileSync("ffprobe", ["-v", "error", "-show_streams", "-show_format", "-of", "json", output], { encoding: "utf8" }))
   const normalizedPicture = normalizedProbe.streams.find(({ codec_type }) => codec_type === "video")
   if (Number(normalizedPicture?.nb_frames) !== Math.round(shot.duration * manifest.fps) || Math.abs(Number(normalizedProbe.format.duration) - shot.duration) > 1 / manifest.fps) throw new Error(`${shot.id}: normalized clip is shorter than the cut list; select a longer verified source window`)
-  records.push({ name: shot.id, sourceFile: path.basename(source), sha256: createHash("sha256").update(data).digest("hex"), sourceWidth: picture.width, sourceHeight: picture.height, sourceDuration, sourceCrop: crop, sourceStart, sourceWindow, playbackRate, output: `assets/montage/${shot.id}.mp4`, outputSha256: createHash("sha256").update(await readFile(output)).digest("hex"), outputWidth, outputHeight, outputDuration: shot.duration, outputFrameRate: manifest.fps, requiredAction: shot.requiredAction, treatment: `Real application recording. Crop and explicit trim/rate only; native source resolution retained with graphite padding to16:9. Silent H264,${manifest.fps}fps. No generated UI or audio.` })
+  records.push({ name: shot.id, sourceFile: path.basename(source), sha256: createHash("sha256").update(data).digest("hex"), sourceWidth: picture.width, sourceHeight: picture.height, sourceDuration, sourceCrop: crop, sourceStart, sourceWindow, playbackRate, output: `assets/montage/${shot.id}.mp4`, outputSha256: createHash("sha256").update(await readFile(output)).digest("hex"), outputWidth, outputHeight, outputDuration: shot.duration, outputFrameRate: manifest.fps, requiredAction: shot.requiredAction, treatment: `Real full-application recording. Only the native OS titlebar is trimmed; all product navigation, sidebars, controls and columns are preserved. Native source resolution retained with graphite padding to16:9. Silent H264,${manifest.fps}fps. No generated UI or audio.` })
   process.stdout.write(`${shot.id}: source ${sourceStart.toFixed(3)}–${(sourceStart + sourceWindow).toFixed(3)}s at ${playbackRate}× → ${shot.duration}s\n`)
 }
 records.sort((a, b) => manifest.shots.findIndex(({ id }) => id === a.name) - manifest.shots.findIndex(({ id }) => id === b.name))
