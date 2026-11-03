@@ -1,19 +1,41 @@
 "use client"
 
-import type { ReactNode } from "react"
-import { motion, useReducedMotion } from "motion/react"
+import { useEffect, useRef, useState, type ReactNode } from "react"
 
-export function Reveal({ children }: { children: ReactNode }) {
-  const reducedMotion = useReducedMotion()
+export function Reveal({
+  children,
+  className
+}: {
+  children: ReactNode
+  className?: string
+}) {
+  const element = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(
+    () => !("IntersectionObserver" in window)
+  )
+
+  useEffect(() => {
+    if (!element.current) return
+    if (!("IntersectionObserver" in window)) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.08 }
+    )
+    observer.observe(element.current)
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <motion.div
-      initial={reducedMotion ? false : { opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.12 }}
-      transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      ref={element}
+      className={`${className ?? ""} reveal${visible ? " is-visible" : ""}`}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }

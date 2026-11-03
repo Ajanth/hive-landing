@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,17 +7,7 @@
       name="description"
       content="Your agent work, in one place. Hive is a local macOS workspace to visualize and organize your agent sessions, context, and next steps."
     />
-    <meta name="theme-color" content="#0b0c10" />
-    <script>
-      try {
-        const hiveTheme = localStorage.getItem('hive-theme');
-        document.documentElement.dataset.theme = hiveTheme === 'light' || hiveTheme === 'dark'
-          ? hiveTheme
-          : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      } catch {
-        document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      }
-    </script>
+    <meta name="theme-color" content="#181818" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Hive - Your agent work, in one place" />
     <meta
@@ -26,7 +16,12 @@
     />
     <meta name="twitter:card" content="summary" />
     <link rel="icon" type="image/png" href="/hive-favicon.png" />
-    <link rel="preload" href="/images/hive-board.webp" as="image" />
+    <link
+      rel="preload"
+      href="/videos/hive-product-demo-poster.webp"
+      as="image"
+      fetchpriority="high"
+    />
     <title>Hive - Your agent work, in one place</title>
   </head>
   <body>

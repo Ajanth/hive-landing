@@ -1,30 +1,30 @@
 # Hive landing page
 
-A landing page for [Hive](https://github.com/Ajanth/hive-public), a local macOS workspace for visualizing and organizing agent work.
+A dark-only landing page for [Hive](https://github.com/Ajanth/hive-public), a local macOS workspace for OpenCode conversations, code, and context.
 
-The hero keeps Hive's wordmark, indigo palette, and galaxy. Five linked callouts explain notes, reminders, tasks, GitHub, and the board. Below it, a keyboard-accessible product tour shows Hive's own onboarding scenes, followed by context features, the repository workflow, privacy, FAQs, and a download section. The page explicitly identifies OpenCode as the currently supported history source.
-
-Geist is self-hosted. A theme toggle follows system preference until a user selects light or dark. The entire page uses the same semantic color tokens and shape system: 8px controls and 12px elevated surfaces. Image provenance and the generated icon prompt are documented in [docs/image-assets.md](docs/image-assets.md).
+The page combines a recorded product film in the main hero with mixed-size bento stories, the repository workflow, privacy, FAQs, and a download close. Hive’s existing navigation brand stays; the large icon above the hero headline is removed. See [DESIGN.md](DESIGN.md) for the design decisions.
 
 ## Development
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-Run `npm run lint` and `npm run build` before publishing. `npm run preview` serves the production build.
+Run `npm run lint` and `npm run build` before publishing. `npm run preview` serves the production build. The app is a static Vite build and requires no server-side runtime.
 
-## Animation
+## Product film and interaction
 
-`src/lib/galaxy-scene.ts` owns the desktop point cloud and animation loop, which also steps `src/lib/feature-orbit.ts`. Star orbits and displacement run in a vertex shader. Pointer events only record coordinates; smoothing, card springs, and wake sampling run once per frame, without React renders. Surface position is read while interacting so coordinates remain accurate after scrolling. Cards protect the hero text and their neighbors, settle under hover or keyboard focus, and the board responds with less motion.
+The 27-second film and WebP poster are ready in `public/videos/`. Its editable source and local render instructions are in [video/hive-demo/README.md](video/hive-demo/README.md).
 
-Three.js loads separately from the hero copy and cards. At widths below 768px, `src/lib/galaxy-mobile.ts` draws 650 stars using Canvas2D at 30fps and avoids downloading WebGL. Both renderers cap pixel density, pause when hidden or offscreen, honor reduced motion, and dispose their resources on unmount. Breakpoint changes replace the canvas and renderer. Mobile shows three callouts, with all five capabilities explained further down the page.
+`src/App.tsx` owns page content. `src/components/hero-video.tsx` owns a single 16:9 video element using `/videos/hive-product-demo.mp4` and `/videos/hive-product-demo-poster.webp`. The production composition uses real Hive recordings and is authored in Hyperframes. The text caption identifies demo work; it does not imply private user sessions appear in the film.
 
-CSS sequences the hero entrance, and isolated Motion components reveal sections and crossfade the product tour. Reduced motion disables entrances, springs, animated transitions, and smooth scrolling. The tour provides loading and error states with a retry action; horizontal image panning preserves readable product details on small screens.
+The player provides keyboard-accessible Play/Pause, Replay, and fullscreen controls. It loads its source only near the viewport and plays automatically only while visible and motion/data preferences allow it. Reduced Motion and Save-Data leave the poster visible until the user presses Play. Offscreen or hidden-tab playback pauses. Autoplay rejection leaves the explicit Play control available; failed media has a retry and direct-video link. Expanding reuses the same video element. Native details elements provide accessible FAQs.
 
-If WebGL is unavailable, the page shows a responsive still captured from the same scene. These fallback images only load when needed.
+The entire page stays dark regardless of system appearance or a previously saved theme choice. There is no theme toggle or theme storage. Below-fold product images load only their dark versions. Geist is self-hosted. A native IntersectionObserver reveals sections once; CSS handles the brief opening sequence. Reduced Motion removes entrance motion and transitions. Reduced Transparency uses opaque navigation. No WebGL, scroll listeners, analytics, or telemetry are included.
 
-## Content
+The supported runtime is OpenCode. Board, Chat, Terminal, Reminders, and Notes are current Hive surfaces. Product capture provenance is documented in [docs/image-assets.md](docs/image-assets.md).
 
-Page copy lives in `src/App.tsx`, orbit callouts in `src/components/feature-orbit.tsx`, and tour content in `src/components/product-tour.tsx`. Every download CTA reads the same public manifest at `https://ajanth.github.io/hive-public/release.json`, which the Hive release workflow updates with the latest signed DMG URL after each release. If the manifest cannot load, the CTA opens the public releases page.
+## Downloads
+
+Every download CTA reads the same public manifest at `https://ajanth.github.io/hive-public/release.json`, which the release workflow updates with the latest signed DMG. The public releases page remains usable while the manifest loads or if it cannot load.
