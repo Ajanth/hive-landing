@@ -35,7 +35,7 @@ for (const shot of selected) {
   if (crop && !/^\d+:\d+:\d+:\d+$/.test(crop)) throw new Error(`Invalid --${shot.id}-crop; use width:height:x:y`)
   const sourceStart = number(`--${shot.id}-start`, 0, 0, 86400)
   const playbackRate = number(`--${shot.id}-speed`, 1, 0.5, 3)
-  const sourceWindow = shot.duration * playbackRate
+  const sourceWindow = Number((shot.duration * playbackRate).toFixed(9))
   const data = await readFile(source)
   const probe = JSON.parse(execFileSync("ffprobe", ["-v", "error", "-show_streams", "-show_format", "-of", "json", source], { encoding: "utf8" }))
   const picture = probe.streams.find(({ codec_type }) => codec_type === "video")

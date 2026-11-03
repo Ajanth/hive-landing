@@ -1,41 +1,43 @@
-# Hive, in motion — full-app camera
+# Hive, in motion — 75% playback
 
-Restore the original full-application camera language while retaining the fast seven-beat montage: 14.1 seconds, 1920 × 1080, 60fps, 846 frames. The full application establishes each feature, the camera smoothly zooms toward the real action, and the full application returns before the cut. The Board remains wide throughout its physical drag so all state columns and the pickup/drop stay visible.
+Uniformly slow the verified full-app film to 75% speed, from 14.1 to 18.8 seconds. Delivery remains 1920 × 1080 at 60fps, now 1128 frames. All recorded actions, camera moves, labels, holds and cut times take exactly 4/3 as long. Feature order, camera paths, full-app framing, source masters and raw action windows are preserved.
 
-## Source fidelity
+## Exact frame schedule
 
-Every clip is re-ingested from the original 1900 × 1020 Dell recording with exactly `1900:980:0:40`: only the native OS titlebar is trimmed. No product sidebar, control, column, conversation, composer or card is permanently cropped. All normalized sources are 1900 × 1070 with neutral graphite padding; source time windows and rates are unchanged.
+| Beat | Start frame | Duration frames | Film time, rounded |
+| --- | ---: | ---: | --- |
+| Board drag | 0 | 192 | 0–3.200s |
+| In progress | 192 | 136 | 3.200–5.467s |
+| Chat | 328 | 176 | 5.467–8.400s |
+| Terminal | 504 | 176 | 8.400–11.333s |
+| Voice | 680 | 144 | 11.333–13.733s |
+| Notes | 824 | 144 | 13.733–16.133s |
+| Reminders | 968 | 160 | 16.133–18.800s |
 
-The video uses `object-fit: contain`. At the overview state `{ xPercent: 0, yPercent: 0, scale: 1 }`, the entire recorded app fits inside the 1920 × 1008 product viewport. A quiet 72px bottom rail holds the feature label. Focus is a reversible GSAP camera transform on the containing wrapper, never a destructive source crop. All UI colors, conversations, running progress, waveform and card motion remain recorded pixels.
+`shots.json` records the exact 60fps cut schedule. Original frame durations [144,102,132,132,108,108,120] become [192,136,176,176,144,144,160]. Media rates become 0.75× for all beats except Chat, which becomes 1.05× instead of 1.4×. These new output durations/rates consume the same original raw time windows.
 
-Notes enters the app’s real Focus mode during its source window. That native mode hides navigation; the complete recorded window and its Focus-mode toolbar remain visible at the ending overview. Navigation is not reconstructed or overlaid.
+## Full-app camera contract
 
-## Timeline and camera
+Every clip retains the complete 1900 × 980 application crop `1900:980:0:40`, removing only the native OS titlebar. Native product pixels are retained inside 1900 × 1070 graphite padding. No product sidebar, control, column or conversation is permanently cropped.
 
-Camera times below are local to each scene. Zoom and pullback use the old `power2.inOut` geometry from commit `7707847`, adapted to the shorter beats. Focus coordinates are percentages of the complete source. Each focused scene starts at full scale, holds the action briefly and settles back to full scale at least 0.2 seconds before its end. No sliding scene fragments, permanent macro crops, drifting camera or fake UI.
+Every scene uses `object-fit: contain`. At overview `{xPercent:0,yPercent:0,scale:1}`, the complete app fits inside the 1920 × 1008 product viewport above the 72px label rail. Focus is the same reversible wrapper transform as the previous verified film, with unchanged `power2.inOut` easing and targets. Each focused shot returns to the full app before its cut; Board stays wide through the entire drag.
 
-| Beat | Film time | Focus (x, y, scale) | Zoom | Pullback |
-| --- | --- | --- | --- | --- |
-| Board drag | 0–2.4s | Full app throughout | None; preserve the entire physical motion | Full app throughout |
-| In progress | 2.4–4.1s | 17%, 49%, 2.35× | 0.14–0.54s | 1.06–1.50s |
-| Chat | 4.1–6.3s | 60%, 48%, 1.70× | 0.18–0.66s | 1.52–2.00s |
-| Terminal | 6.3–8.5s | 49%, 49%, 1.50× | 0.18–0.66s | 1.52–2.00s |
-| Voice | 8.5–10.3s | 60%, 89%, 2.50× | 0.14–0.57s | 1.14–1.60s |
-| Notes | 10.3–12.1s | 50%, 28%, 1.85× | 0.14–0.57s | 1.14–1.60s |
-| Reminders | 12.1–14.1s | 52%, 23%, 2.05× | 0.16–0.62s | 1.32–1.80s |
+Local camera timings below are rounded for reading; scene HTML retains the scaled values.
 
-## Required actions
+| Beat | Unchanged focus (x,y,scale) | Slower zoom | Slower pullback |
+| --- | --- | --- | --- |
+| Board | Full app throughout | None | None |
+| In progress | 17%,49%,2.35× | 0.187–0.720s | 1.413–2.000s |
+| Chat | 60%,48%,1.70× | 0.240–0.880s | 2.027–2.667s |
+| Terminal | 49%,49%,1.50× | 0.240–0.880s | 2.027–2.667s |
+| Voice | 60%,89%,2.50× | 0.187–0.760s | 1.520–2.133s |
+| Notes | 50%,28%,1.85× | 0.187–0.760s | 1.520–2.133s |
+| Reminders | 52%,23%,2.05× | 0.213–0.827s | 1.760–2.400s |
 
-- A real pointer drag of one card from Done to Now, with the persisted destination state visible.
-- One running thread card with genuinely animated blue progress during the real request.
-- A real built-in Chat exchange and answer arrival.
-- A real Terminal Chat exchange and native scrolling.
-- Native voice Listening, timer and changing measured waveform; no transcription claim.
-- One rich Markdown note and its native Focus-mode transition.
-- One scheduled standalone reminder in the selected workspace; it is not attached to a chat thread.
+Label arrival changes from 0.12 to 0.16 seconds. The note’s native Focus mode still hides its own navigation during the same source action; the editorial framing continues to preserve the complete recorded window.
 
-No task-creation sequence, idle introduction, long typing hold or outro. Silence remains deliberate for the muted-autoplay landing-page hero. Labels use local Geist at 36px/500, #C7C5CD on #181818.
+## Required actions and verification
 
-## Acceptance and proof
+Retain the actual Done → Now card drag/drop, native running blue progress, real built-in Chat exchange, actual Terminal Chat, native Listening/waveform, rich Markdown note and scheduled standalone workspace reminder. No new capture, app/model call, task creation or fabricated UI. Silence remains intentional for the muted-autoplay hero.
 
-Before the delivery render, inspect a start, middle and end frame for all seven scenes. The Board must be full-app in all three; each other scene must prove full app → temporary focus → full app. Then run Hyperframes lint/check/review and inspect beat, seam and phone sheets. Decode the final H.264 MP4 and inspect encoded establishing/focus/pullback frames. The poster must come from the opening full-app establishing frame, not an isolated card or composer.
+Verify raw source hashes/windows/crops unchanged; every media rate is its previous value ×0.75; all durations and camera/label/cut times are their previous value ÷0.75. Run lint and browser-backed composition checks, inspect representative full-app/focus/pullback frames, render H.264, verify 18.8 seconds/1128 frames at60fps, and fully decode the MP4. The poster remains a full-app establishing frame at the correspondingly retimed opening instant.

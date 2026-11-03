@@ -2,56 +2,65 @@
   "fps": 60,
   "width": 1920,
   "height": 1080,
-  "duration": 14.1,
+  "duration": 18.8,
   "shots": [
     {
       "id": "board-drag",
       "label": "Board",
-      "start": 0,
-      "duration": 2.4,
-      "requiredAction": "A card visibly lands in another state column"
+      "start": 0.0,
+      "duration": 3.2,
+      "requiredAction": "A card visibly lands in another state column",
+      "frames": 192
     },
     {
       "id": "running-thread",
       "label": "In progress",
-      "start": 2.4,
-      "duration": 1.7,
-      "requiredAction": "A real running thread card with animated blue progress"
+      "start": 3.2,
+      "duration": 2.2666666666666666,
+      "requiredAction": "A real running thread card with animated blue progress",
+      "frames": 136
     },
     {
       "id": "chat",
       "label": "Chat",
-      "start": 4.1,
-      "duration": 2.2,
-      "requiredAction": "An actual built-in Chat exchange"
+      "start": 5.466666666666667,
+      "duration": 2.933333333333333,
+      "requiredAction": "An actual built-in Chat exchange",
+      "frames": 176
     },
     {
       "id": "terminal",
       "label": "Terminal",
-      "start": 6.3,
-      "duration": 2.2,
-      "requiredAction": "An actual terminal Chat exchange"
+      "start": 8.4,
+      "duration": 2.933333333333333,
+      "requiredAction": "An actual terminal Chat exchange",
+      "frames": 176
     },
     {
       "id": "voice",
       "label": "Voice",
-      "start": 8.5,
-      "duration": 1.8,
-      "requiredAction": "Native voice Listening with measured waveform"
+      "start": 11.333333333333334,
+      "duration": 2.4,
+      "requiredAction": "Native voice Listening with measured waveform",
+      "frames": 144
     },
     {
       "id": "note",
       "label": "Notes",
-      "start": 10.3,
-      "duration": 1.8,
-      "requiredAction": "One existing note in the editor"
+      "start": 13.733333333333333,
+      "duration": 2.4,
+      "requiredAction": "One existing note in the editor",
+      "frames": 144
     },
     {
       "id": "reminder",
       "label": "Reminders",
-      "start": 12.1,
-      "duration": 2.0,
-      "requiredAction": "One scheduled reminder in the workspace"
+      "start": 16.133333333333333,
+      "duration": 2.6666666666666665,
+      "requiredAction": "One scheduled reminder in the workspace",
+      "frames": 160
     }
-  ]
+  ],
+  "frames": 1128,
+  "playbackRate": 0.75
 }

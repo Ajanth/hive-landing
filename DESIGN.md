@@ -8,7 +8,7 @@ Design variance: 7. Motion intensity: 6. Visual density: 4. The page uses existi
 
 The hero uses a recorded product film with seven quick action beats: a smooth card drag between Board states, the animated blue border of a running thread, built-in Chat, Terminal Chat, voice recording, one note, and one reminder. Skip task creation, idle setup, and long typing or menu sequences. Dark appearance is the only page appearance; system settings and old theme storage must have no effect.
 
-The video composition targets 14.1 seconds at 1920 × 1080 / 60 fps, with roughly two seconds per action. All seven beats use the full Hive application recordings from the external Dell display. Each shot establishes the complete app, smoothly zooms into its action, then pulls back to the full app before the cut. Keep the Board wide enough to follow the entire drag across its state columns. The Chat exchanges use DeepSeek Flash; the blue progress and voice waveform are actual product states.
+The video composition targets 18.8 seconds at 1920 × 1080 / 60 fps. Footage, focus motions, labels, and cuts run at 0.75× the previous speed, giving each action more time to read. All seven beats use the full Hive application recordings from the external Dell display. Each shot establishes the complete app, smoothly zooms into its action, then pulls back to the full app before the cut. Keep the Board wide enough to follow the entire drag across its state columns. The Chat exchanges use DeepSeek Flash; the blue progress and voice waveform are actual product states.
 
 ## Composition and implementation
 
