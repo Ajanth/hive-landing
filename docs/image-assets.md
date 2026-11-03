@@ -1,24 +1,33 @@
-# Hive landing page images
+# Hive landing page assets
 
-## Product tour
+## Hero product film
 
-`public/images/hive-board.webp`, `hive-context.webp`, and `hive-search.webp` are browser captures of Hive's real onboarding components: OnboardingOrganizeScene, OnboardingContinuityScene, and OnboardingDeliveryScene. They use the product's existing sample work, rendered from the sibling Hive WebUI source. They are product-tour illustrations rather than screenshots of a user's sessions. The page labels them accordingly.
+`public/videos/hive-product-demo.mp4` is a silent 27-second Hyperframes film made from real Hive 4.9 application recordings captured November 3, 2026. It is H.264, 1920 × 1080, 30fps, with fast-start metadata. The WebP poster is extracted from the rendered film at 4.7 seconds.
 
-Each capture is 1120 × 368 pixels and encoded as WebP at quality 94. Source components: `../hive/WebUI/src/features/onboarding/`.
+The edit shows composing a Chat draft, starring a Board task and inspecting its menus, and the native voice Listening state with its measured waveform. It makes no claim of an assistant response, completed card move, or successful transcription. All sample work was authored for the demo. Editorial camera movements and chapter transitions reframe the recorded interface without reconstructing product UI.
 
-## Icon product render
+The editable project, normalized source clips, source hashes, storyboard, and verification notes are in [`video/hive-demo`](../video/hive-demo/README.md). Hyperframes 0.9.8 is pinned in that isolated development package; the website does not load its runtime. Raw capture masters remain outside the checkout.
 
-`public/images/hive-orbit-icon.webp` is an 800 × 800 transparent WebP generated with the built-in image generation tool, using the existing `public/hive-app-icon.webp` as a reference. The original brand asset is preserved.
+## Supporting product captures
+
+The three `public/images/hive-{board,notes,focus}-dark.webp` files show the real Hive 4.9 WebUI components at source commit `9e935570` from Hive’s `origin/main`, captured November 3, 2026. They are 1280 × 720 browser captures, encoded as WebP at quality 94. Only dark captures are shipped.
+
+These are product illustrations using authored sample work, not private user sessions. No interface is generated or reconstructed in landing-page HTML.
+
+A temporary local Vite entry mounted the actual `App` through `HiveBridgeClient` and the existing `BoardAppTransport`. The existing `card`/`twoProjectSnapshot` fixtures supplied the board shape; authored Meridian/Studio project names, session titles, and notes replaced test placeholders. Native data and OpenCode servers were not connected. The product source was extracted into a scratch directory without changing a permanent Hive checkout.
+
+- `board`: current navigation, project/worktree controls and Now/Queue/Done board.
+- `notes`: current shared Notes library with authored notes and filters.
+- `focus`: current visual Markdown editor with the sample note linked to its project, worktree and conversation. This name describes the landing-page view; it does not claim that the product’s Focus mode toggle is enabled.
+
+## Opal material backdrop
+
+`public/images/hive-opal-field.webp` is an original 1672 × 941 image generated with the built-in image generation tool, then encoded as WebP at quality 83. The dark-only page dims and desaturates it with CSS. It contains no text, brand mark or product UI. The original Hive app icon remains in the navigation and favicon; the large hero icon is removed.
 
 Final generation prompt:
 
 ```text
-Use case: product-mockup
-Asset type: supporting product image for the Hive macOS landing page.
-Input image: the existing Hive app icon is the brand identity reference. Preserve its lowercase h inside a thin hexagonal indigo frame, its square rounded silhouette, and its graphite metal material.
-Primary request: create a beautifully restrained, high-end 3D studio render of the Hive icon as a physical graphite-metal app tile, floating at a slight three-quarter angle, with precise machined edges, soft violet-blue edge reflections and a single graceful elliptical brushed-metal orbit passing behind it. The existing logo must remain instantly recognizable. Do not add text or interfaces.
-Composition: square composition, icon centered in the middle 65%, three-quarter perspective, generous clean negative space, subtle ambient occlusion, product-photography polish.
-Lighting: soft large silver studio light from upper left, muted indigo rim light, no excessive glow, no stars, no haze.
-Materials: dark matte graphite, polished bevel, subtly translucent violet inner hexagon.
-Constraints: isolated on a truly transparent background. No pedestal, no floor, no extra logos, no letters beyond the existing lowercase h, no caption, no watermark. Elegant, crisp, tactile, understated.
+Use case: stylized-concept. Asset type: wide atmospheric background texture for Hive, a modern Mac productivity app landing page. Create an exquisitely subtle abstract macro photograph / high-end 3D material study of translucent opaline glass sheets curving in a soft, spacious wave. Silver-white pearlescent light, cool mist, very restrained periwinkle and indigo at the outer edges, soft shadows that reveal real dimensional layers, almost tactile frosted glass with microscopic fine grain. Landscape 16:9 composition. Quiet pale center for dark headline text; more material detail in lower right and left edges, clean upper middle, no discrete objects. It should feel like an original Apple studio material photograph: smooth, dimensional, luminous, understated, contemporary. No stars, no galaxy, no planets, no neon, no circles, no hexagons, no geometry grid, no text, no logo, no UI, no mockup, no watermark. The result must be a beautiful photographic atmospheric surface, not a flat CSS radial gradient.
 ```
+
+The old galaxy stills, onboarding strips, and generated orbit icon have been retired along with their renderers.

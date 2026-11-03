@@ -1,198 +1,370 @@
 import {
   ArrowRightIcon,
   BellRingingIcon,
-  BookmarkSimpleIcon,
+  ChatCircleDotsIcon,
   CheckIcon,
   GitBranchIcon,
   GitCommitIcon,
   GitPullRequestIcon,
   HardDrivesIcon,
-  NotePencilIcon,
-  ShieldCheckIcon,
-  TerminalWindowIcon,
+  KanbanIcon,
+  LockSimpleIcon,
+  NotebookIcon,
+  TerminalWindowIcon
 } from "@phosphor-icons/react"
 
 import { DownloadButton } from "@/components/download-button"
-import { Galaxy } from "@/components/galaxy"
-import { ProductTour } from "@/components/product-tour"
+import { ProductImage } from "@/components/product-tour"
+import { HeroVideo } from "@/components/hero-video"
 import { Reveal } from "@/components/reveal"
 import { SiteHeader } from "@/components/site-header"
 
 const GITHUB_URL = "https://github.com/Ajanth/hive-public"
+const questions = [
+  [
+    "What does Hive work with?",
+    "Hive currently works with OpenCode. Organize local sessions on the board, continue in Chat or Terminal, and keep notes, bookmarks, and reminders connected to the work."
+  ],
+  [
+    "Which Mac do I need?",
+    "Hive requires macOS 14 or later. Download the signed DMG, open it, and drag Hive into Applications."
+  ],
+  [
+    "Does my session history leave my Mac?",
+    "Hive stores and indexes your history locally, with no telemetry, analytics, or remote logging. Network access is used for agent requests, signed updates, submitted feedback, and integrations or repository actions you initiate."
+  ],
+  [
+    "Can I continue work I already started?",
+    "Yes. Bring existing OpenCode sessions into your workspace. Pick up a thread in Chat, use the integrated Terminal, or resume in an external terminal without losing the surrounding context."
+  ]
+]
 
 export default function App() {
   return (
     <>
-      <a className="skip-link" href="#main">Skip to content</a>
-      <div className="opening">
-        <SiteHeader />
-        <main id="main">
-          <section className="hero" aria-labelledby="hero-heading">
-            <div className="hero-copy">
-              <p className="hero-eyebrow">Your local agent workspace</p>
-              <h1 id="hero-heading">
-                <span>Your agent work.</span>
-                <span>In one place.</span>
-              </h1>
-              <p className="hero-description">
-                Organize agent sessions, save the context, and pick up your next
-                step in one local Mac workspace.
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <SiteHeader />
+      <main id="main">
+        <section className="hero" aria-labelledby="hero-heading">
+          <div className="hero-material" aria-hidden="true" />
+          <div className="hero-copy section-shell">
+            <h1 id="hero-heading">
+              Good ideas deserve
+              <br />a great workspace.
+            </h1>
+            <p>
+              Your agent conversations, code, and context.
+              <br className="desktop-break" /> Beautifully connected, right on
+              your Mac.
+            </p>
+            <div className="hero-actions">
+              <DownloadButton />
+              <a className="secondary-button" href="#product">
+                Take a look <ArrowRightIcon size={17} aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+          <div id="product" className="hero-product section-shell">
+            <HeroVideo />
+          </div>
+        </section>
+
+        <section
+          className="features-section section-shell"
+          aria-labelledby="features-heading"
+        >
+          <Reveal>
+            <div className="section-intro">
+              <h2 id="features-heading">
+                Less switching.
+                <br />
+                <span>More making.</span>
+              </h2>
+              <p>
+                A place for the work in progress, the thought worth keeping, and
+                whatever comes next.
               </p>
-              <div className="hero-actions">
-                <DownloadButton />
-                <a className="text-link" href="#product">
-                  Explore Hive <ArrowRightIcon size={17} aria-hidden="true" />
-                </a>
+            </div>
+          </Reveal>
+          <div className="bento-grid">
+            <Reveal className="bento-board">
+              <article className="bento-card board-card">
+                <div className="bento-copy">
+                  <KanbanIcon size={25} weight="duotone" aria-hidden="true" />
+                  <h3>See the whole picture.</h3>
+                  <p>
+                    Give your OpenCode sessions a home. Organize the now, the
+                    next, and the work you’ve moved forward.
+                  </p>
+                </div>
+                <div className="board-crop">
+                  <ProductImage view="board" decorative />
+                </div>
+              </article>
+            </Reveal>
+            <Reveal className="bento-notes">
+              <article className="bento-card notes-card">
+                <div className="bento-copy">
+                  <NotebookIcon size={25} weight="duotone" aria-hidden="true" />
+                  <h3>Keep the good thinking.</h3>
+                  <p>
+                    A real Markdown editor. A shared notes library. Your
+                    decisions, close to the work that inspired them.
+                  </p>
+                </div>
+                <div className="notes-crop">
+                  <ProductImage view="focus" decorative />
+                </div>
+              </article>
+            </Reveal>
+            <Reveal className="bento-reminders">
+              <article className="bento-card reminders-card">
+                <div className="reminder-sculpture" aria-hidden="true">
+                  <BellRingingIcon size={82} weight="duotone" />
+                </div>
+                <div className="bento-copy">
+                  <h3>A nudge, with the why.</h3>
+                  <p>
+                    Set a reminder on the conversation. Come back to the
+                    context, ready to take the next step.
+                  </p>
+                </div>
+              </article>
+            </Reveal>
+            <Reveal className="bento-workflow">
+              <article className="bento-card repository-card">
+                <div className="repository-path" aria-hidden="true">
+                  <span>
+                    <GitBranchIcon size={30} weight="light" />
+                  </span>
+                  <i />
+                  <span>
+                    <GitCommitIcon size={30} weight="light" />
+                  </span>
+                  <i />
+                  <span>
+                    <GitPullRequestIcon size={30} weight="light" />
+                  </span>
+                </div>
+                <div className="bento-copy">
+                  <h3>From a thread to a pull request.</h3>
+                  <p>
+                    Worktrees, commits, and GitHub checks. Keep the repository
+                    in reach as the idea becomes something real.
+                  </p>
+                  <a className="text-link" href="#workflow">
+                    Find your flow{" "}
+                    <ArrowRightIcon size={17} aria-hidden="true" />
+                  </a>
+                </div>
+              </article>
+            </Reveal>
+          </div>
+        </section>
+
+        <section
+          id="workflow"
+          className="workflow-section section-shell"
+          aria-labelledby="workflow-heading"
+        >
+          <Reveal>
+            <div className="workflow-layout">
+              <div className="workflow-copy">
+                <h2 id="workflow-heading">
+                  Stay in the flow.
+                  <br />
+                  <span>Keep your place.</span>
+                </h2>
+                <p className="section-description">
+                  Some moments call for a conversation. Others, a terminal. Hive
+                  brings the pieces together around the same work.
+                </p>
+                <div className="workflow-list">
+                  <div>
+                    <ChatCircleDotsIcon
+                      size={23}
+                      weight="duotone"
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <h3>Talk it through.</h3>
+                      <p>
+                        Continue your OpenCode conversations in a dedicated Chat
+                        workspace.
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <TerminalWindowIcon
+                      size={23}
+                      weight="duotone"
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <h3>Get into the details.</h3>
+                      <p>
+                        Use the integrated Terminal or resume in your own. Your
+                        project stays within reach.
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <NotebookIcon
+                      size={23}
+                      weight="duotone"
+                      aria-hidden="true"
+                    />
+                    <div>
+                      <h3>Leave a little context.</h3>
+                      <p>
+                        Save the decision, bookmark the useful moment, and pick
+                        up where you left off.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="workflow-visual">
+                <div className="workflow-window">
+                  <ProductImage view="notes" decorative />
+                </div>
+                <p>
+                  <NotebookIcon size={16} aria-hidden="true" /> A shared home
+                  for your notes, across projects.
+                </p>
               </div>
             </div>
-            <Galaxy />
-          </section>
+          </Reveal>
+        </section>
 
-          <section id="product" className="product-section section-shell" aria-labelledby="product-heading">
-            <Reveal>
-              <div className="section-intro">
-                <h2 id="product-heading">A place for every thread.</h2>
-                <p>Your sessions, decisions, and next steps. Connected by the work they belong to.</p>
-              </div>
-              <ProductTour />
-              <div className="product-caption">
-                <span>Hive’s product tour, shown with sample work.</span>
-                <span><HardDrivesIcon size={15} aria-hidden="true" /> Local on your Mac</span>
-              </div>
-            </Reveal>
-          </section>
-
-          <section className="context-section section-shell" aria-labelledby="context-heading">
-            <Reveal>
-              <div className="section-intro">
-                <h2 id="context-heading">Keep the thinking.<br />Move the work forward.</h2>
-                <p>A useful conversation becomes a saved decision, a clear task, or a reminder with the context still attached.</p>
-              </div>
-              <div className="feature-stories">
-                <article className="story story-context">
-                  <div className="story-copy">
-                    <NotePencilIcon size={24} aria-hidden="true" />
-                    <h3>Good context compounds.</h3>
-                    <p>Save decisions as notes. Bookmark the useful moments. Keep a thread’s reasoning close to its next step.</p>
-                  </div>
-                  <div className="context-art">
-                    <img src="/images/hive-context.webp" alt="Hive’s tour connects an OpenCode conversation to a note, bookmark, and reminder." width={1120} height={368} loading="lazy" />
-                  </div>
-                  <div className="story-details">
-                    <span><NotePencilIcon size={16} aria-hidden="true" /> Notes</span>
-                    <span><BookmarkSimpleIcon size={16} aria-hidden="true" /> Bookmarks</span>
-                    <span><BellRingingIcon size={16} aria-hidden="true" /> Reminders</span>
-                  </div>
-                </article>
-                <article className="story story-reminder">
-                  <BellRingingIcon className="reminder-icon" size={38} weight="light" aria-hidden="true" />
-                  <div className="story-copy">
-                    <h3>A nudge. With the why.</h3>
-                    <p>Set a reminder on the work itself. Come back to the conversation that made it matter.</p>
-                  </div>
-                </article>
-                <article className="story story-memory">
-                  <div className="story-copy">
-                    <h3>Find the thread again.</h3>
-                    <p>Search your local history and recover the decision, not just the session title.</p>
-                  </div>
-                  <div className="search-art">
-                    <img src="/images/hive-search.webp" alt="Searching OpenCode history in Hive’s tour reveals matching threads and their saved context." width={1120} height={368} loading="lazy" />
-                  </div>
-                </article>
-              </div>
-            </Reveal>
-          </section>
-
-          <section id="workflow" className="workflow-section section-shell" aria-labelledby="workflow-heading">
-            <Reveal>
-              <div className="workflow-heading">
-                <GitPullRequestIcon size={25} aria-hidden="true" />
-                <h2 id="workflow-heading">From a thread<br />to a pull request.</h2>
-                <p>Stay close to the repository. Keep the worktree, commits, and GitHub checks within reach as your work takes shape.</p>
-              </div>
-              <ol className="delivery-flow">
-                <li>
-                  <div className="flow-symbol"><GitBranchIcon size={27} weight="light" aria-hidden="true" /></div>
-                  <h3>Give the work a home.</h3>
-                  <p>Keep sessions organized around the project and worktree they belong to.</p>
-                </li>
-                <li>
-                  <div className="flow-symbol"><GitCommitIcon size={27} weight="light" aria-hidden="true" /></div>
-                  <h3>Keep changes in context.</h3>
-                  <p>Move between agent work and repository actions without losing your place.</p>
-                </li>
-                <li>
-                  <div className="flow-symbol"><GitPullRequestIcon size={27} weight="light" aria-hidden="true" /></div>
-                  <h3>Follow it through.</h3>
-                  <p>Create a pull request and check its GitHub status from the workspace.</p>
-                </li>
-              </ol>
-              <p className="workflow-footnote"><TerminalWindowIcon size={17} aria-hidden="true" /> Open a thread. Resume in your terminal. Keep going.</p>
-            </Reveal>
-          </section>
-
-          <section className="privacy-section section-shell" aria-labelledby="privacy-heading">
-            <Reveal>
-              <div className="privacy-composition">
-                <div className="privacy-copy">
-                  <p className="section-eyebrow">Local by design</p>
-                  <h2 id="privacy-heading">Your work lives<br />where you do.</h2>
-                  <p>Hive keeps your session history on your Mac. No telemetry, no analytics, and no remote logging.</p>
-                  <a className="text-link" href={`${GITHUB_URL}#security--privacy`} target="_blank" rel="noreferrer">Read about privacy <ArrowRightIcon size={17} aria-hidden="true" /></a>
+        <section
+          className="privacy-section section-shell"
+          aria-labelledby="privacy-heading"
+        >
+          <Reveal>
+            <div className="privacy-panel">
+              <div className="privacy-art" aria-hidden="true">
+                <div className="icon-plinth">
+                  <img
+                    src="/hive-app-icon.webp"
+                    alt=""
+                    width={116}
+                    height={116}
+                    loading="lazy"
+                  />
                 </div>
-                <img className="privacy-product" src="/images/hive-orbit-icon.webp" alt="A sculptural graphite rendering of the Hive app icon, encircled by a silver orbit." width={1280} height={1280} loading="lazy" />
+                <LockSimpleIcon
+                  className="privacy-lock"
+                  size={26}
+                  weight="duotone"
+                />
+              </div>
+              <div className="privacy-copy">
+                <h2 id="privacy-heading">
+                  At home.
+                  <br />
+                  <span>On your Mac.</span>
+                </h2>
+                <p>
+                  Your session history stays local. No telemetry, no analytics,
+                  and no remote logging. Just a little more room to do your
+                  thing.
+                </p>
+                <a
+                  className="text-link"
+                  href={`${GITHUB_URL}#security--privacy`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  The details on privacy{" "}
+                  <ArrowRightIcon size={17} aria-hidden="true" />
+                </a>
               </div>
               <div className="privacy-principles">
-                <span><HardDrivesIcon size={19} aria-hidden="true" /> Local session history</span>
-                <span><ShieldCheckIcon size={19} aria-hidden="true" /> Signed app updates</span>
-                <span><CheckIcon size={19} aria-hidden="true" /> No telemetry</span>
+                <span>
+                  <HardDrivesIcon size={18} aria-hidden="true" /> Local history
+                </span>
+                <span>
+                  <LockSimpleIcon size={18} aria-hidden="true" /> Signed app
+                  updates
+                </span>
+                <span>
+                  <CheckIcon size={18} aria-hidden="true" /> No telemetry
+                </span>
               </div>
-            </Reveal>
-          </section>
+            </div>
+          </Reveal>
+        </section>
 
-          <section className="faq-section section-shell" aria-labelledby="faq-heading">
-            <Reveal>
-              <h2 id="faq-heading">A few useful details.</h2>
+        <section
+          className="faq-section section-shell"
+          aria-labelledby="faq-heading"
+        >
+          <Reveal>
+            <div className="faq-layout">
+              <h2 id="faq-heading">
+                A few
+                <br />
+                <span>useful details.</span>
+              </h2>
               <div className="faq-list">
-                <details>
-                  <summary>What does Hive work with?<span aria-hidden="true">+</span></summary>
-                  <p>Hive currently supports local OpenCode session history. It brings that work into a searchable board with notes, reminders, worktree tools, and terminal resume.</p>
-                </details>
-                <details>
-                  <summary>Which Mac do I need?<span aria-hidden="true">+</span></summary>
-                  <p>Hive requires macOS 14 or later. Download the signed DMG, open it, and drag Hive into Applications.</p>
-                </details>
-                <details>
-                  <summary>Does my session history leave my Mac?<span aria-hidden="true">+</span></summary>
-                  <p>Hive stores and indexes your history locally. Network access is used for features such as signed updates, submitted feedback, and integrations or repository actions you explicitly initiate.</p>
-                </details>
-                <details>
-                  <summary>Can I pick up an existing session?<span aria-hidden="true">+</span></summary>
-                  <p>Yes. Resume from a board card, focus a live terminal when available, or copy an OpenCode resume command to continue your work.</p>
-                </details>
+                {questions.map(([question, answer]) => (
+                  <details key={question}>
+                    <summary>
+                      {question}
+                      <span aria-hidden="true">+</span>
+                    </summary>
+                    <p>{answer}</p>
+                  </details>
+                ))}
               </div>
-            </Reveal>
-          </section>
+            </div>
+          </Reveal>
+        </section>
 
-          <section className="closing-section section-shell" aria-labelledby="closing-heading">
-            <Reveal>
-              <img src="/hive-app-icon.webp" alt="" width={64} height={64} loading="lazy" />
-              <h2 id="closing-heading">Make room for<br />your next good idea.</h2>
-              <p>Bring the threads together. Keep the work moving.</p>
+        <section
+          className="closing-section section-shell"
+          aria-labelledby="closing-heading"
+        >
+          <Reveal>
+            <div className="closing-panel">
+              <img
+                src="/hive-app-icon.webp"
+                alt=""
+                width={56}
+                height={56}
+                loading="lazy"
+              />
+              <h2 id="closing-heading">
+                Your next idea
+                <br />
+                looks good here.
+              </h2>
+              <p>Make yourself at home in Hive.</p>
               <DownloadButton />
               <span className="platform-note">For macOS 14 and later</span>
-            </Reveal>
-          </section>
-        </main>
-      </div>
+            </div>
+          </Reveal>
+        </section>
+      </main>
       <footer className="site-footer section-shell">
-        <a className="footer-wordmark" href="#">Hive</a>
+        <a className="wordmark" href="#" aria-label="Hive home">
+          <img src="/hive-app-icon.webp" alt="" width={25} height={25} />
+          Hive
+        </a>
         <span>A little more space to think.</span>
         <div>
-          <a href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub</a>
-          <a href={`${GITHUB_URL}/releases`} target="_blank" rel="noreferrer">Releases</a>
-          <a href={`${GITHUB_URL}/issues`} target="_blank" rel="noreferrer">Feedback</a>
+          <a href={GITHUB_URL} target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+          <a href={`${GITHUB_URL}/releases`} target="_blank" rel="noreferrer">
+            Releases
+          </a>
+          <a href={`${GITHUB_URL}/issues`} target="_blank" rel="noreferrer">
+            Feedback
+          </a>
         </div>
       </footer>
     </>

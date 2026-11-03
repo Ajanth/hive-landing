@@ -1,0 +1,45 @@
+{
+  "product": "Hive 4.9",
+  "provenance": "Actual application recordings captured for this film",
+  "clips": [
+    {
+      "name": "chat",
+      "sourceFile": "chat.mov",
+      "sha256": "b60d534d906b8337aa27a5afbf7aa63d1ada097aabfe685c3ca7c2da7d74bd1a",
+      "sourceWidth": 3104,
+      "sourceHeight": 1844,
+      "sourceDuration": 12.011667,
+      "sourceCrop": "2880:1524:112:172",
+      "output": "assets/recordings/chat.mp4",
+      "outputWidth": 2880,
+      "outputHeight": 1620,
+      "treatment": "Authored crop removes OS recording indicator/window shadow when specified. Native crop pixels retained with graphite padding to16:9, 30fps, silent H264. No generated UI or audio."
+    },
+    {
+      "name": "board",
+      "sourceFile": "board.mov",
+      "sha256": "5999253f420d74b3d5580026e92f562684e89870a75694889c148edbe99883c0",
+      "sourceWidth": 3104,
+      "sourceHeight": 1844,
+      "sourceDuration": 15.03,
+      "sourceCrop": "2880:1524:112:172",
+      "output": "assets/recordings/board.mp4",
+      "outputWidth": 2880,
+      "outputHeight": 1620,
+      "treatment": "Authored crop removes OS recording indicator/window shadow when specified. Native crop pixels retained with graphite padding to16:9, 30fps, silent H264. No generated UI or audio."
+    },
+    {
+      "name": "voice",
+      "sourceFile": "voice-take2.mov",
+      "sha256": "720642678541b2e83234bff371f93e87e0c842831e43f55af279d3bf20d8256c",
+      "sourceWidth": 3104,
+      "sourceHeight": 1844,
+      "sourceDuration": 30.01,
+      "sourceCrop": "2880:1524:112:172",
+      "output": "assets/recordings/voice.mp4",
+      "outputWidth": 2880,
+      "outputHeight": 1620,
+      "treatment": "Authored crop removes OS recording indicator/window shadow when specified. Native crop pixels retained with graphite padding to16:9, 30fps, silent H264. No generated UI or audio."
+    }
+  ]
+}
