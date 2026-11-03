@@ -15,7 +15,7 @@ Run `npm run lint` and `npm run build` before publishing. `npm run preview` serv
 
 ## Product film and interaction
 
-The 14.1-second, 60fps film and WebP poster are ready in `public/videos/`. Seven quick beats show a real card drag, running thread progress, built-in Chat, Terminal Chat, voice recording, a note, and a reminder. Its editable source and local render instructions are in [video/hive-demo/README.md](video/hive-demo/README.md).
+The 14.1-second, 60fps film and WebP poster are ready in `public/videos/`. Seven quick beats show a real card drag, running thread progress, built-in Chat, Terminal Chat, voice recording, a note, and a reminder. Full-app views and smooth focus zooms preserve the workspace around each action. Its editable source and local render instructions are in [video/hive-demo/README.md](video/hive-demo/README.md).
 
 `src/App.tsx` owns page content. `src/components/hero-video.tsx` owns a single 16:9 video element using `/videos/hive-product-demo.mp4` and `/videos/hive-product-demo-poster.webp`. The production composition uses real Hive recordings and is authored in Hyperframes. The text caption identifies demo work; it does not imply private user sessions appear in the film.
 
