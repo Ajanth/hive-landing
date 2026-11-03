@@ -1,35 +1,31 @@
 # Hive landing page
 
-A dark-only marketing page for people building with OpenCode on a Mac. Keep the spacious, product-led pacing of the Codex landing page and the material depth of ScryClip’s approved Graphite reference. Preserve Hive’s navigation wordmark, Geist typography, and indigo identity. Remove the large app icon above the hero headline.
+A dark product-led page for people using OpenCode on a Mac. Four sections total: introduction and approved film, Board, Chat and Terminal, then Notes and Reminders. A compact text-only footer follows. No footer logo, separate FAQ, icon sculptures, bento grid, or closing panel.
 
-Design variance: 7. Motion intensity: 6. Visual density: 4. The page uses existing React, CSS, and Tailwind dependencies, with a native IntersectionObserver for section entrances. The hero product film is authored with Hyperframes from real Hive recordings.
+Design variance 6, motion intensity 5, visual density 3. Retain self-hosted Geist and the Hive indigo accent (#5865d8 and its lighter tints) against neutral graphite. Native CSS and the existing React/Tailwind stack implement the design; no new runtime dependencies.
 
-## Latest direction
+## Visual direction
 
-The hero uses a recorded product film with seven quick action beats: a smooth card drag between Board states, the animated blue border of a running thread, built-in Chat, Terminal Chat, voice recording, one note, and one reminder. Skip task creation, idle setup, and long typing or menu sequences. Dark appearance is the only page appearance; system settings and old theme storage must have no effect.
+Borrow the generous containment and concise editorial rhythm of Cursor and Codex, and the fine edges and graphite depth of ScryClip’s approved designs. Use a broad oblique indigo paint wash with slow transform motion. The wash frames the product and stays subordinate to it. Keep text on dark regions. Do not reuse the darkened Opal raster backdrop.
 
-The video composition targets 18.8 seconds at 1920 × 1080 / 60 fps. Footage, focus motions, labels, and cuts run at 0.75× the previous speed, giving each action more time to read. All seven beats use the full Hive application recordings from the external Dell display. Each shot establishes the complete app, smoothly zooms into its action, then pulls back to the full app before the cut. Keep the Board wide enough to follow the entire drag across its state columns. The Chat exchanges use DeepSeek Flash; the blue progress and voice waveform are actual product states.
+Use a left-aligned, two-line introduction with a short paragraph and direct download. The wide hero stage contains the complete 16:9 film with breathing room. The scene description beside its controls is a complete sentence synchronized to the current action. Keep its height stable across scenes. Use restrained corners: 12px stages, 8px product windows, pill download buttons, and 8px controls.
 
-## Composition and implementation
+Below the film, show short product stories with genuine product captures. Board is a copy/media row, Chat/Terminal reverses the scale and uses two real product windows, and Notes/Reminders is a broad visual with copy above it. Vary the composition without adding ornamental card shells.
 
-1. A dark material backdrop, concise introduction, and direct download.
-2. A large 16:9 product film with a single reusable video element, Play/Pause, Replay, and fullscreen controls. Its caption identifies the demo work.
-3. Four mixed-size bento stories: organization, Markdown context, reminders, and repository workflow. Supporting product images use dark captures only.
-4. Open workflow explanation, local-first privacy, FAQs, download close, and footer.
+## Approved film and captions
 
-Use coherent indigo, neutral graphite, subtle material lighting, and selective contact shadows. Generous corners follow the supplied ScryClip reference. Outer cards stay still on hover. Entrances, press feedback, and the product film carry motion. Avoid scroll hijacking. Reduced Motion removes entrances and requires explicit video playback. Save-Data also requires explicit playback. Pause media offscreen or when its tab is hidden. Reduced Transparency uses opaque navigation.
+The approved film is already 25% slower than the original at 0.75× speed: 18.8 seconds, 1128 frames, 1920 × 1080 / 60fps. Preserve the encoded MP4, full-app establishing views, zooms, pullbacks, and seven action windows. Do not apply another slowdown. SHA-256: 75d1b6fa10fc2e09c1fa81efae22a03a01ba82999c57744dbd2d092f7757ae76.
 
-The video source must remain unloaded until near the viewport or explicitly requested. Browser autoplay rejection must leave a usable Play control. Media failure exposes retry and a direct-video link. Fullscreen reuses the existing media element, avoiding a second stream. Keep loading/error states in the same frame geometry to prevent layout shifts.
+The seven captions describe the real Board drag, running thread progress, built-in Chat, Terminal Chat, voice Listening, Markdown note Focus mode, and reminder. Avoid a transcription-success claim. The real chats use DeepSeek Flash. Static captures are extracted from the existing footage; no new recording is needed.
 
-Preserve the release manifest, Product/Workflow anchors, skip link, visible focus, and accurate privacy details. OpenCode remains the shipped runtime integration. Keep the permanent checkout on main; implementation lives in the assigned task worktree.
+## Interaction and verification
+
+Keep one video element, near-viewport loading, explicit Play/Pause, Replay, fullscreen, and retry/fallback controls. Respect Reduced Motion and Save-Data. Pause offscreen and in hidden tabs. Changing captions must follow seeks, replay, and loops without unsolicited screen-reader announcements. Reduced Motion freezes the paint wash and section entrances. Preserve visible focus and the release-manifest download flow.
+
+Check desktop, 390px and 320px layouts, all captions over a playback loop, pause/replay/fullscreen, motion preferences, downloads, lint, and production build. Obtain independent visual and code critiques before handoff. Keep the implementation in its task worktree; the permanent checkout remains on main.
 
 ## References
 
-- https://chatgpt.com/codex/ (visually inspected November 3, 2026).
-- https://github.com/heygen-com/hyperframes
-- ScryClip `ROG-171/Design/frozen/2026-11-02-approved` and `DESIGN.md`.
-- Hive release 4.9 and its current WebUI design system.
-
-## Verification boundary
-
-Run lint, TypeScript/production build, dark-only and 320px layout checks, video control/visibility/preference/error checks, downloads, and independent review after the final media is integrated. Historical gallery/theme measurements do not verify the revised video page. No deployment is implied by a local preview or build.
+- https://openai.com/codex/ and the user’s supplied screenshots, November 4, 2026.
+- https://cursor.com/home and its official deployed CSS, November 4, 2026.
+- ScryClip ROG-171 Design/frozen/2026-11-02-approved Graphite mock designs.

@@ -6,7 +6,7 @@ type ProductView = "board" | "notes" | "focus"
 
 const descriptions: Record<ProductView, string> = {
   board:
-    "Hive 4.9 Board with projects, worktrees, and sample OpenCode sessions in Now, Queue and Done.",
+    "Hive Board showing sample OpenCode sessions organized in Now and Queue.",
   notes:
     "Hive 4.9 shared Notes library with authored sample notes and project filters.",
   focus:
