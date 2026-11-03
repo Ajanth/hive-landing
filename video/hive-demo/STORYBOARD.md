@@ -1,7 +1,5 @@
 # Storyboard
 
-The app is present from the first frame. The camera first establishes Chat, then follows the real drafting activity in the composer. It returns to the app’s surrounding navigation before moving into Board. Actual starring and menu inspection supply the Board changes; no completed move is implied. Voice input is the last close view: the native Listening state and measured waveform play before the camera widens again. The transcription result is not shown.
+Open on an actual card already being dragged and let it land in the next state. Cut immediately to a running thread with native blue progress. Move into a concise built-in Chat exchange, then match the conversation framing into Terminal Chat. Voice recording supplies the next short action. A useful note and one reminder close the loop, then the film returns straight to the opening drag.
 
-Chapter names are editorial labels outside the application picture. Every product control and message comes from recorded Hive 4.9 pixels. No still illustration, synthetic reply or fake audio visualization may substitute for missing material.
-
-The web page supplies play/pause, replay, full-screen inspection and a reduced-motion poster. The film itself contains no imitation player controls or call-to-action overlay.
+Seven beats in 14.1 seconds. No idle typing, task creation, menu tour, title card or end card. Small labels name each surface without taking attention away from the action. Every product state comes from recorded Hive pixels. Crop, trim, speed and camera anchors are explicit and editable; no interface is rebuilt in HTML.

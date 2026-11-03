@@ -1,34 +1,29 @@
-# Hive: keep your momentum
+# Hive, in motion
 
-Goal: make the working Hive app feel tangible through its own live Chat, Board and voice-input interactions.
+A fast, silent product montage for the dark landing-page hero. The working app is visible from frame 0. There is no title card, task-creation sequence, idle workspace hold or outro. The footage is recorded from the Hive 4.9 app on the external Dell monitor; chapter labels and camera reframing are editorial.
 
-Output: silent hero film, Hyperframes 0.9.8, 1920 × 1080, 30 fps, 27 seconds (810 frames). Silence is intentional for muted autoplay on the marketing page; no voiceover, music, synthetic UI sounds or fabricated waveform is added.
+Master: 1920 × 1080, 60fps, 14.1 seconds, 846 frames. Seven action beats last 1.7–2.4 seconds. A maximum 0.22-second directional arrival replaces the previous 0.65–0.72-second camera moves and 8–10-second chapter holds. Actual UI colors, messages, progress, waveform and card movement remain recorded pixels. No generated UI, artificial blue progress or synthetic conversation substitutes are permitted.
 
-Chosen storyline: follow the same work through conversation, organization and voice input. Alternatives considered and not built: a fast feature montage (too little time for the real controls to read), and an abstract brand film (does not answer the request to record the product).
+## Timeline
 
-Material: the recorded Hive 4.9 app is the picture. Preserve its text, state colors, chrome and real actions. No rebuilding the interface in HTML, no screenshots passed off as motion, no invented messages, no fabricated input or waveform. Capture provenance lives in `assets/sources.json` after ingest.
-
-Look: graphite ground `#181818`, white ink `#F3F2F5`, muted ink `#B0ADB8`, Hive indigo from the real interface. Geist variable at 64px/530 for the chapter name and 30px/450 for the short supporting line. Chapter text occupies the outer 96px top band; product footage owns the rest of the frame. No logo icon, decorative particles, 3D app tilt, neon, halos, gradients or fake device frame.
-
-Motion: registry `ui-focus-zoom` camera-servo geometry, without its skeleton or halo; registry `cut-the-curve` directional timing, without CSS filtering the recorded app. Arrivals use `power4.out`, camera moves use `power2.inOut`, exits use `power4.in`. A framing move takes 18–24 frames. Product content plays at its actual rate unless an explicit source trim/rate is recorded in the composition. Text lands and holds still. No breathing/drift loops.
-
-## Shots
-
-| Film time | Picture | Camera and reading | Handoff |
+| Frames | Film time | Required actual action | Readability target |
 | --- | --- | --- | --- |
-| 0–1.05s | Real Chat workspace, already visible on the first frame | Establish the app; chapter “Chat” | Track into the composer |
-| 1.05–6.1s | Actual draft composition | 1.85× view; hold while real text is entered | Tighten the view of the authored draft |
-| 6.1–8.65s | Actual composer interaction | 2.05× view | Return to workspace scale |
-| 8.65–10.2s | Real Chat overview | Brief contextual return | Directional seam into Board |
-| 10.2–14.95s | Actual Board star/menu interaction | 1.7× view of the card and action | Follow the real menu |
-| 14.95–17.4s | Actual Board menu inspection | 1.9× view | Pull back to show the columns |
-| 17.4–18.9s | Real Board overview | Keep the board visible | Directional seam into Voice |
-| 18.9–21.3s | Real voice-input flow | 2× view of the native composer and record control | Tighten around Listening and the waveform |
-| 21.3–25.8s | Actual listening/waveform recording | 3× macro view; hold on the real measured state | Pull back to the still-listening workspace |
-| 25.8–27s | Real listening state in its workspace | 1× context; no end-card obstruction | Loop back into the same app world |
+| 0–143 | 0–2.4s | One card dragged smoothly and visibly dropped into another state column | The source state is visible at pickup; camera follows the uninterrupted drag and holds the destination state after landing |
+| 144–245 | 2.4–4.1s | One running thread card with its native animated blue progress | Card and genuine progress visible immediately |
+| 246–377 | 4.1–6.3s | One actual exchange in the built-in Chat | Prompt and meaningful reply fit the shot; no waiting for a blank composer |
+| 378–509 | 6.3–8.5s | One actual exchange in Terminal Chat | Terminal identity and a meaningful response are readable |
+| 510–617 | 8.5–10.3s | Native voice recording/Listening and measured waveform | Record control and live waveform visible; no transcription-accuracy claim |
+| 618–725 | 10.3–12.1s | One existing note in its editor | A useful note title and body are visible; no note-creation flow |
+| 726–845 | 12.1–14.1s | One reminder associated with the work | Real reminder text/context and due state are visible |
 
-The Chat clip is real draft composition, not assistant generation. It is trimmed from source t=1.8s; actual typing is visible around source t=5–6s; camera anchors follow the lower-center composer. Board starts at source t=4.4s and shows starring and menu inspection, not a completed card move. Voice uses `voice-take2.mov` from source t=4.2s and shows native Listening and its real waveform only. It does not show or claim a transcription result. The setup take, stop take and inaccurate transcription result are excluded.
+Each input is trimmed to the action rather than accelerating idle setup. Natural action speed is preferred; an explicit 0.5–3× editorial playback rate is available in ingest and is recorded in provenance. No source window may run past the supplied capture or create a frozen tail.
 
-## Verification
+## Frame treatment
 
-Run Hyperframes lint/check and inspect beat, seam and phone sheets. Check the rendered duration, codec, dimensions and lack of audio with ffprobe. Review decoded MP4 frames, not only browser snapshots. Deliver an H.264 MP4 with fast-start metadata and an actual film frame as the poster. Do not render placeholders into a claimed final asset.
+Graphite background #181818, ungraded app pixels, Geist #C7C5CD feature labels at 36px/500. Product footage fills the upper 1008px; a quiet 72px bottom rail holds the one- or two-word label. Text stays still after a 0.12-second opacity arrival. No giant chapter banner, decorative scene counters, fake device frame, app tilt, halo, vignette, drift or breathing loop.
+
+Framing adapts the already researched Hyperframes `ui-focus-zoom` geometry, and cut timing adapts `cut-the-curve`; the source pixels are not filtered. Each beat establishes at its useful crop immediately and holds while the real action happens. Directional arrivals take 0.22 seconds with `power4.out`. Chat to Terminal and Reminder to opening Board are direct cuts; other seams use short direction changes. Any refinement must be justified by the recorded action, not motion for its own sake.
+
+## Acceptance and proof
+
+Every required action must be visible in the final encoded MP4. The drag must land, the progress must animate, both conversations must contain real exchanges, and no task-creation sequence may appear. Validate all seven normalized media durations and source hashes, then run Hyperframes lint/check, inspect beat/seam/360px phone sheets, render, decode the actual MP4, and inspect encoded action frames. The final poster comes from an encoded frame with the opening card drag in motion. Silence is deliberate for a muted autoplay landing-page hero.

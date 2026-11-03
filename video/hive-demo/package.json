@@ -3,13 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "hyperframes preview --background --port 5186",
+    "dev": "hyperframes preview --background --port 5187",
     "ingest": "node scripts/prepare-media.mjs",
     "lint": "hyperframes lint --json",
     "check": "hyperframes check --snapshots --json",
     "review": "hyperframes snapshot --review --json",
-    "render": "hyperframes render --fps 30 --quality delivery --format mp4 --video-frame-format png --keyframe-interval 2 --crf 20 -o renders/hive-product-demo.mp4",
-    "poster": "ffmpeg -hide_banner -loglevel error -y -ss 4.7 -i renders/hive-product-demo.mp4 -frames:v 1 renders/hive-product-demo-poster.png && /opt/homebrew/bin/cwebp -quiet -q 90 renders/hive-product-demo-poster.png -o renders/hive-product-demo-poster.webp"
+    "render": "hyperframes render --fps 60 --quality delivery --format mp4 --video-frame-format png --keyframe-interval 2 --crf 20 -o renders/hive-product-demo.mp4",
+    "poster": "ffmpeg -hide_banner -loglevel error -y -ss 0.65 -i renders/hive-product-demo.mp4 -frames:v 1 renders/hive-product-demo-poster.png && /opt/homebrew/bin/cwebp -quiet -q 90 renders/hive-product-demo-poster.png -o renders/hive-product-demo-poster.webp"
   },
   "devDependencies": {
     "hyperframes": "0.9.8"
