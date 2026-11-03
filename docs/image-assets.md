@@ -20,14 +20,12 @@ A temporary local Vite entry mounted the actual `App` through `HiveBridgeClient`
 - `notes`: current shared Notes library with authored notes and filters.
 - `focus`: current visual Markdown editor with the sample note linked to its project, worktree and conversation. This name describes the landing-page view; it does not claim that the product’s Focus mode toggle is enabled.
 
-## Opal material backdrop
+## Film stills for product stories
 
-`public/images/hive-opal-field.webp` is an original 1672 × 941 image generated with the built-in image generation tool, then encoded as WebP at quality 83. The dark-only page dims and desaturates it with CSS. It contains no text, brand mark or product UI. The original Hive app icon remains in the navigation and favicon; the large hero icon is removed.
+`public/images/hive-{chat,terminal,reminder}-dark.webp` are real stills extracted at 1.0 seconds from the corresponding normalized clips in `video/hive-demo/assets/montage/`. They are 1900 × 1070 WebP images at quality 90. CSS focuses the supporting stills around the conversation, terminal content, and reminder card. The approved hero film retains its full-app framing.
 
-Final generation prompt:
+## Indigo paint wash
 
-```text
-Use case: stylized-concept. Asset type: wide atmospheric background texture for Hive, a modern Mac productivity app landing page. Create an exquisitely subtle abstract macro photograph / high-end 3D material study of translucent opaline glass sheets curving in a soft, spacious wave. Silver-white pearlescent light, cool mist, very restrained periwinkle and indigo at the outer edges, soft shadows that reveal real dimensional layers, almost tactile frosted glass with microscopic fine grain. Landscape 16:9 composition. Quiet pale center for dark headline text; more material detail in lower right and left edges, clean upper middle, no discrete objects. It should feel like an original Apple studio material photograph: smooth, dimensional, luminous, understated, contemporary. No stars, no galaxy, no planets, no neon, no circles, no hexagons, no geometry grid, no text, no logo, no UI, no mockup, no watermark. The result must be a beautiful photographic atmospheric surface, not a flat CSS radial gradient.
-```
+The moving background is authored with native CSS gradients and transform animations in `src/index.css`, using Hive’s existing indigo accent and neutral graphite. It follows the film’s playing state, pauses with the media, and remains still under Reduced Motion. No external image or animation runtime is loaded. The old generated Opal field has been retired.
 
-The old galaxy stills, onboarding strips, and generated orbit icon have been retired along with their renderers.
+The original Hive app icon remains in the navigation and favicon. No app icon or wordmark appears in the footer.

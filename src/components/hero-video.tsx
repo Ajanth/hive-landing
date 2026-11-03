@@ -8,15 +8,18 @@ import {
   PauseIcon,
   PlayIcon
 } from "@phosphor-icons/react"
+import { DEMO_SCENES, getDemoSceneIndex } from "@/lib/demo-captions"
 
 const VIDEO_URL = "/videos/hive-product-demo.mp4"
 const POSTER_URL = "/videos/hive-product-demo-poster.webp"
+const CAPTIONS_URL = "/videos/hive-product-demo.vtt"
 
 type SavingConnection = EventTarget & { saveData?: boolean }
 
 export function HeroVideo() {
   const film = useRef<HTMLElement>(null)
   const video = useRef<HTMLVideoElement>(null)
+  const currentSceneIndex = useRef(0)
   const intent = useRef<"auto" | "play" | "pause">("auto")
   const conditions = useRef({
     near: false,
@@ -30,7 +33,16 @@ export function HeroVideo() {
   const [retry, setRetry] = useState(0)
   const [expanded, setExpanded] = useState(false)
   const [fullscreenFailed, setFullscreenFailed] = useState(false)
-  const caption = useId()
+  const [sceneIndex, setSceneIndex] = useState(0)
+  const description = useId()
+  const scene = DEMO_SCENES[sceneIndex]
+
+  function synchronizeScene() {
+    const nextSceneIndex = getDemoSceneIndex(video.current?.currentTime ?? 0)
+    if (nextSceneIndex === currentSceneIndex.current) return
+    currentSceneIndex.current = nextSceneIndex
+    setSceneIndex(nextSceneIndex)
+  }
 
   const synchronizePlayback = useCallback(() => {
     const element = video.current
@@ -126,6 +138,7 @@ export function HeroVideo() {
 
   function replay() {
     if (video.current) video.current.currentTime = 0
+    synchronizeScene()
     intent.current = "play"
     setSourceEnabled(true)
     synchronizePlayback()
@@ -150,53 +163,79 @@ export function HeroVideo() {
   }
 
   return (
-    <figure className="hero-film" ref={film} aria-label="Hive product demo">
-      <div className="film-screen">
-        <video
-          ref={video}
-          src={
-            sourceEnabled
-              ? `${VIDEO_URL}${retry ? `?retry=${retry}` : ""}`
-              : undefined
-          }
-          poster={POSTER_URL}
-          width={1920}
-          height={1080}
-          preload={sourceEnabled ? "auto" : "none"}
-          muted
-          loop
-          playsInline
-          aria-label="Hive product walkthrough"
-          aria-describedby={caption}
-          onCanPlay={synchronizePlayback}
-          onPlay={() => setPlaying(true)}
-          onPause={() => setPlaying(false)}
-          onError={() => {
-            setFailed(true)
-            setPlaying(false)
-          }}
-        >
-          <a href={VIDEO_URL}>Open the Hive product demo</a>
-        </video>
-        {failed && (
-          <div className="film-error" role="status">
-            <p>The product demo couldn’t load.</p>
-            <div>
-              <button onClick={retryVideo}>Try again</button>
-              <a href={VIDEO_URL} target="_blank" rel="noreferrer">
-                Open video
-              </a>
+    <figure className="hero-film" ref={film} data-playing={playing} aria-label="Hive product demo">
+      <div className="film-stage">
+        <div className="film-screen">
+          <video
+            ref={video}
+            src={
+              sourceEnabled
+                ? `${VIDEO_URL}${retry ? `?retry=${retry}` : ""}`
+                : undefined
+            }
+            poster={POSTER_URL}
+            width={1920}
+            height={1080}
+            preload={sourceEnabled ? "auto" : "none"}
+            muted
+            loop
+            playsInline
+            aria-label="Hive product walkthrough"
+            aria-describedby={description}
+            onCanPlay={synchronizePlayback}
+            onLoadedMetadata={synchronizeScene}
+            onTimeUpdate={synchronizeScene}
+            onSeeking={synchronizeScene}
+            onSeeked={synchronizeScene}
+            onPlay={() => {
+              synchronizeScene()
+              setPlaying(true)
+            }}
+            onPause={() => setPlaying(false)}
+            onError={() => {
+              setFailed(true)
+              setPlaying(false)
+            }}
+          >
+            <track
+              kind="captions"
+              src={CAPTIONS_URL}
+              srcLang="en"
+              label="English"
+            />
+            <a href={VIDEO_URL}>Open the Hive product demo</a>
+          </video>
+          {failed && (
+            <div className="film-error" role="status">
+              <p>The product demo couldn’t load.</p>
+              <div>
+                <button onClick={retryVideo}>Try again</button>
+                <a href={VIDEO_URL} target="_blank" rel="noreferrer">
+                  Open video
+                </a>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
-      <figcaption className="film-caption" id={caption}>
+      <figcaption className="film-caption" aria-live="off">
         <div className="film-description">
-          <strong>Hive, in motion.</strong>
-          <span>
-            Board, Chat, Terminal, voice, Notes, and Reminders. Captured in Hive
-            with demo work.
-          </span>
+          <div className="film-scene-meta">
+            <span className="film-scene-count">
+              {String(sceneIndex + 1).padStart(2, "0")} /{" "}
+              {String(DEMO_SCENES.length).padStart(2, "0")}
+            </span>
+            <strong className="film-scene-title">{scene.title}</strong>
+          </div>
+          <p className="film-live-caption">{scene.caption}</p>
+          <p className="sr-only" id={description}>
+            A seven-scene Hive walkthrough: move a card from Done to Now; follow
+            a running thread’s blue progress; use OpenCode in built-in Chat;
+            switch the same work between Terminal and Chat; activate voice input
+            with a Listening indicator and waveform; write a Markdown note in
+            Focus; and add a reminder linked to a project and worktree. Captured
+            in Hive with demo work.
+          </p>
         </div>
         <div className="film-controls" aria-label="Product demo controls">
           <button
