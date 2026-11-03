@@ -166,7 +166,7 @@ export function HeroVideo() {
           muted
           loop
           playsInline
-          aria-label="Hive in use: Chat, Board, and voice recording"
+          aria-label="Hive product walkthrough"
           aria-describedby={caption}
           onCanPlay={synchronizePlayback}
           onPlay={() => setPlaying(true)}
@@ -194,7 +194,8 @@ export function HeroVideo() {
         <div className="film-description">
           <strong>Hive, in motion.</strong>
           <span>
-            Chat, Board, and voice recording. Captured in Hive with demo work.
+            Board, Chat, Terminal, voice, Notes, and Reminders. Captured in Hive
+            with demo work.
           </span>
         </div>
         <div className="film-controls" aria-label="Product demo controls">

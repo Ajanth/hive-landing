@@ -1,27 +1,29 @@
 <!doctype html>
-<html lang="en" data-resolution="landscape" data-composition-variables='[{"id":"chat_label","type":"string","label":"Chat chapter label","default":"Chat"},{"id":"chat_strap","type":"string","label":"Chat supporting line","default":"Give the idea a starting point."},{"id":"board_label","type":"string","label":"Board chapter label","default":"Board"},{"id":"board_strap","type":"string","label":"Board supporting line","default":"Give the work a place."},{"id":"voice_label","type":"string","label":"Voice chapter label","default":"Voice"},{"id":"voice_strap","type":"string","label":"Voice supporting line","default":"Record in the conversation."}]'>
+<html lang="en" data-resolution="landscape" data-composition-variables='[{"id":"board-drag_label","type":"string","label":"Board label","default":"Board"},{"id":"running-thread_label","type":"string","label":"In progress label","default":"In progress"},{"id":"chat_label","type":"string","label":"Chat label","default":"Chat"},{"id":"terminal_label","type":"string","label":"Terminal label","default":"Terminal"},{"id":"voice_label","type":"string","label":"Voice label","default":"Voice"},{"id":"note_label","type":"string","label":"Notes label","default":"Notes"},{"id":"reminder_label","type":"string","label":"Reminders label","default":"Reminders"}]'>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=1920, height=1080" />
-  <title>Hive: keep your momentum</title>
+  <title>Hive, in motion</title>
   <script src="assets/lib/gsap-3.15.0.min.js"></script>
   <style>
     * { box-sizing: border-box; }
     html, body { width: 1920px; height: 1080px; margin: 0; overflow: hidden; background: #181818; }
-    #root { position: relative; width: 100%; height: 100%; overflow: hidden; }
-    .film-ground { position: absolute; inset: 0; background: #181818; }
+    #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #181818; }
   </style>
 </head>
 <body>
-  <div data-hf-id="hf-getc" id="root" data-composition-id="main" data-start="0" data-duration="27" data-width="1920" data-height="1080" data-motion-blur="on">
-    <div data-hf-id="hf-a1kh" class="film-ground" aria-hidden="true"></div>
-    <div data-hf-id="hf-f0a9" id="chat" class="clip" data-composition-id="chat" data-composition-src="compositions/chat.html" data-start="0" data-duration="10.2" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" data-beat="Chat" style="z-index:1"></div>
-    <div data-hf-id="hf-fxvw" id="board" class="clip" data-composition-id="board" data-composition-src="compositions/board.html" data-start="10.2" data-duration="8.7" data-track-index="2" data-track-kind="graphics" data-width="1920" data-height="1080" data-beat="Board" style="z-index:2"></div>
-    <div data-hf-id="hf-mfh3" id="voice" class="clip" data-composition-id="voice" data-composition-src="compositions/voice.html" data-start="18.9" data-duration="8.1" data-track-index="3" data-track-kind="graphics" data-width="1920" data-height="1080" data-beat="Voice" style="z-index:3"></div>
+  <div data-hf-id="hf-8ptd" id="root" data-composition-id="main" data-start="0" data-duration="14.1" data-width="1920" data-height="1080" data-motion-blur="on">
+    <div data-hf-id="hf-4u5n" id="board-drag" class="clip" data-composition-id="board-drag" data-composition-src="compositions/board-drag.html" data-start="0" data-duration="2.4" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" data-beat="Board" style="z-index:1"></div>
+    <div data-hf-id="hf-d3vs" id="running-thread" class="clip" data-composition-id="running-thread" data-composition-src="compositions/running-thread.html" data-start="2.4" data-duration="1.7" data-track-index="2" data-track-kind="graphics" data-width="1920" data-height="1080" data-beat="In progress" style="z-index:2"></div>
+    <div data-hf-id="hf-pr9v" id="chat" class="clip" data-composition-id="chat" data-composition-src="compositions/chat.html" data-start="4.1" data-duration="2.2" data-track-index="3" data-track-kind="graphics" data-width="1920" data-height="1080" data-beat="Chat" style="z-index:3"></div>
+    <div data-hf-id="hf-n93l" id="terminal" class="clip" data-composition-id="terminal" data-composition-src="compositions/terminal.html" data-start="6.3" data-duration="2.2" data-track-index="4" data-track-kind="graphics" data-width="1920" data-height="1080" data-beat="Terminal" style="z-index:4"></div>
+    <div data-hf-id="hf-tesg" id="voice" class="clip" data-composition-id="voice" data-composition-src="compositions/voice.html" data-start="8.5" data-duration="1.8" data-track-index="5" data-track-kind="graphics" data-width="1920" data-height="1080" data-beat="Voice" style="z-index:5"></div>
+    <div data-hf-id="hf-soik" id="note" class="clip" data-composition-id="note" data-composition-src="compositions/note.html" data-start="10.3" data-duration="1.8" data-track-index="6" data-track-kind="graphics" data-width="1920" data-height="1080" data-beat="Notes" style="z-index:6"></div>
+    <div data-hf-id="hf-0sw3" id="reminder" class="clip" data-composition-id="reminder" data-composition-src="compositions/reminder.html" data-start="12.1" data-duration="2.0" data-track-index="7" data-track-kind="graphics" data-width="1920" data-height="1080" data-beat="Reminders" style="z-index:7"></div>
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-    tl.to({}, { duration: 27 }, 0);
+    tl.to({}, { duration: 14.1 }, 0);
     window.__timelines = window.__timelines || {};
     window.__timelines.main = tl;
   </script>

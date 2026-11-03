@@ -6,9 +6,9 @@ Design variance: 7. Motion intensity: 6. Visual density: 4. The page uses existi
 
 ## Latest direction
 
-The user rejected the static hero gallery and requested a recorded, animated product film covering Chat, Board, and voice recording. The main hero must use the film rather than a screenshot carousel. Dark appearance is the only page appearance; system settings and old theme storage must have no effect.
+The hero uses a recorded product film with seven quick action beats: a smooth card drag between Board states, the animated blue border of a running thread, built-in Chat, Terminal Chat, voice recording, one note, and one reminder. Skip task creation, idle setup, and long typing or menu sequences. Dark appearance is the only page appearance; system settings and old theme storage must have no effect.
 
-The video composition targets 27 seconds at 1920 × 1080 / 30 fps. It uses actual product interactions with demo work, edited with restrained camera moves and callouts. It must not invent waveform activity or agent responses. Video capture, composition, encoding, and final poster verification belong to the production work alongside this page.
+The video composition targets 14.1 seconds at 1920 × 1080 / 60 fps, with roughly two seconds per action. All seven beats use real Hive recordings from the external Dell display. The Chat exchanges use DeepSeek Flash; the blue progress and voice waveform are actual product states. Short camera follows and cuts keep the action readable without idle holds, fabricated interface states, or synthetic responses.
 
 ## Composition and implementation
 

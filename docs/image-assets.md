@@ -2,9 +2,9 @@
 
 ## Hero product film
 
-`public/videos/hive-product-demo.mp4` is a silent 27-second Hyperframes film made from real Hive 4.9 application recordings captured November 3, 2026. It is H.264, 1920 × 1080, 30fps, with fast-start metadata. The WebP poster is extracted from the rendered film at 4.7 seconds.
+`public/videos/hive-product-demo.mp4` is a silent 14.1-second Hyperframes film made from real Hive 4.9 application recordings captured on the Dell U2419HC display November 3, 2026. It is H.264, 1920 × 1080, 60fps, with fast-start metadata. The WebP poster is extracted from the rendered film.
 
-The edit shows composing a Chat draft, starring a Board task and inspecting its menus, and the native voice Listening state with its measured waveform. It makes no claim of an assistant response, completed card move, or successful transcription. All sample work was authored for the demo. Editorial camera movements and chapter transitions reframe the recorded interface without reconstructing product UI.
+Seven short beats show a persisted Done-to-Now pointer drag, a running thread's animated blue progress border, an actual built-in Chat exchange, the same conversation in Terminal Chat, native voice Listening and its measured waveform, a rich Markdown note entering Focus mode, and a scheduled reminder. The real chat responses use OpenCode's DeepSeek V4.1 Flash Free model. All sample work was authored for the demo. Task creation and setup are excluded; no transcription success is claimed. Crops and brief camera moves reframe recorded pixels without reconstructing product UI.
 
 The editable project, normalized source clips, source hashes, storyboard, and verification notes are in [`video/hive-demo`](../video/hive-demo/README.md). Hyperframes 0.9.8 is pinned in that isolated development package; the website does not load its runtime. Raw capture masters remain outside the checkout.
 
