@@ -4,12 +4,12 @@ import { readFileSync } from 'node:fs'
 
 import { DEMO_SCENES, getDemoSceneIndex } from '../src/lib/demo-captions.ts'
 
-// Actual scene cuts in the approved 60fps film, including exact frame328.
-const starts = [0, 192, 328, 504, 680, 824, 968].map(frame => frame / 60)
+// Actual scene cuts in the approved 60fps film, including exact frame469.
+const starts = [0, 274, 469, 720, 971, 1177, 1383].map(frame => frame / 60)
 
 test('each cut changes the caption while preserving the preceding frame', () => {
   assert.deepEqual(DEMO_SCENES.map(scene => scene.start), starts)
-  assert.equal(DEMO_SCENES.at(-1).end, 18.8)
+  assert.equal(DEMO_SCENES.at(-1).end, 26.85)
   for (let index = 1; index < starts.length; index += 1) {
     assert.equal(getDemoSceneIndex(starts[index] - 1 / 60), index - 1)
     assert.equal(getDemoSceneIndex(starts[index]), index)
@@ -19,10 +19,10 @@ test('each cut changes the caption while preserving the preceding frame', () => 
 })
 
 test('seeking forward/backward, replay and looping select the appropriate shot', () => {
-  const positions = [0, 10, 17, 6, 4, 18.8, 0, 16.5, 0]
-  assert.deepEqual(positions.map(getDemoSceneIndex), [0, 3, 6, 2, 1, 6, 0, 6, 0])
+  const positions = [0, 15, 24, 8, 5, 26.85, 0, 21, 0]
+  assert.deepEqual(positions.map(getDemoSceneIndex), [0, 3, 6, 2, 1, 6, 0, 5, 0])
   assert.equal(getDemoSceneIndex(-1), 0)
-  assert.equal(getDemoSceneIndex(20), 6)
+  assert.equal(getDemoSceneIndex(30), 6)
 })
 
 test('VTT cues match visible copy and remain aligned within millisecond precision', () => {

@@ -13,11 +13,11 @@
     .source-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
     .feature-label { position: absolute; left: 64px; bottom: 16px; margin: 0; color: #C7C5CD; font-size: 36px; font-weight: 500; line-height: 1.1; letter-spacing: -0.035em; }
   </style>
-  <div data-hf-id="hf-i38q" id="root" data-composition-id="terminal" data-width="1920" data-height="1080" data-duration="2.933333333333333" data-fps="60">
+  <div data-hf-id="hf-i38q" id="root" data-composition-id="terminal" data-width="1920" data-height="1080" data-duration="4.183333333333334" data-fps="60">
     <div data-hf-id="hf-i9b0" class="shot-stage" data-layout-allow-overflow>
       <div data-hf-id="hf-49el" class="video-viewport" data-layout-allow-overflow>
         <div data-hf-id="hf-uhlv" class="camera-world" data-layout-allow-overflow>
-          <video data-hf-id="hf-uf2r" id="terminal-footage" class="clip source-video" data-start="0" data-duration="2.933333333333333" data-media-start="0" data-track-index="0" src="assets/montage/terminal.mp4" muted playsinline style="z-index:1"></video>
+          <video data-hf-id="hf-uf2r" id="terminal-footage" class="clip source-video" data-start="0" data-duration="4.183333333333334" data-media-start="0" data-track-index="0" src="assets/montage/terminal.mp4" muted playsinline style="z-index:1"></video>
         </div>
       </div>
     </div>
@@ -38,10 +38,10 @@
     const tl = gsap.timeline({ paused: true });
     tl.set(world, overview, 0);
     const closeView = focus(49, 49, 1.5);
-    tl.fromTo(world, overview, { ...closeView, duration: 0.64, ease: "power2.inOut", immediateRender: false }, 0.24);
-    tl.fromTo(world, closeView, { ...overview, duration: 0.64, ease: "power2.inOut", immediateRender: false }, 2.026666666667);
-    tl.fromTo(label, { opacity: 0.5 }, { opacity: 1, duration: 0.16, ease: "power2.out" }, 0);
-    tl.to({}, { duration: 2.933333333333 }, 0);
+    tl.fromTo(world, overview, { ...closeView, duration: 0.912727272727, ease: "power2.inOut", immediateRender: false }, 0.342272727273);
+    tl.fromTo(world, closeView, { ...overview, duration: 0.912727272727, ease: "power2.inOut", immediateRender: false }, 2.890303030304);
+    tl.fromTo(label, { opacity: 0.5 }, { opacity: 1, duration: 0.228181818182, ease: "power2.out" }, 0);
+    tl.to({}, { duration: 4.183333333333 }, 0);
     window.__timelines = window.__timelines || {};
     window.__timelines["terminal"] = tl;
   </script>

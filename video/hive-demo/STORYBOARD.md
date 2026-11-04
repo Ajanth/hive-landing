@@ -4,6 +4,6 @@ Open on the complete Board and keep every column visible while the card physical
 
 The note’s own Focus-mode transition is preserved; its complete native window is shown again after the editorial pullback. The reminder remains part of the full Reminders workspace, rather than an isolated card placed on a blank canvas.
 
-Seven beats remain in 18.8 seconds at 60fps. Every normalized source preserves the whole product UI; only the OS titlebar is trimmed. `object-fit: contain` preserves the complete app at overview scale. No task creation, imitation interface, permanent detail crops, title card or end card.
+Seven beats remain in 26.85 seconds at 60fps. Every normalized source preserves the whole product UI; only the OS titlebar is trimmed. `object-fit: contain` preserves the complete app at overview scale. No task creation, imitation interface, permanent detail crops, title card or end card.
 
-The complete edit is slowed uniformly to 75% of its previous speed. Recorded action windows, framing, camera paths and feature order stay the same; all action playback, zooms, labels and cuts take 4/3 as long.
+The previous 18.8-second edit is slowed by approximately another 30%, to 26.85 seconds. Each shot is rounded to whole 60fps frames; its media and camera/label timing are stretched by that shot’s exact new/old frame ratio. Source action windows and full-app geometry are preserved.

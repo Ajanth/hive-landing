@@ -1,43 +1,29 @@
-# Hive, in motion — 75% playback
+# Hive product film — another 30% slower
 
-Uniformly slow the verified full-app film to 75% speed, from 14.1 to 18.8 seconds. Delivery remains 1920 × 1080 at 60fps, now 1128 frames. All recorded actions, camera moves, labels, holds and cut times take exactly 4/3 as long. Feature order, camera paths, full-app framing, source masters and raw action windows are preserved.
+Retiming of verified commit 83a1719: slow its 18.8-second film by approximately another 30%, preserving the full-app establishing/focus/pullback geometry and all seven actual action windows. Delivery is 26.85 seconds, 1611 frames at 60fps, 1920 × 1080. Cumulative cuts are rounded to whole frames; this is within one frame of exact 0.70× playback.
 
-## Exact frame schedule
+## Exact cut schedule
 
-| Beat | Start frame | Duration frames | Film time, rounded |
-| --- | ---: | ---: | --- |
-| Board drag | 0 | 192 | 0–3.200s |
-| In progress | 192 | 136 | 3.200–5.467s |
-| Chat | 328 | 176 | 5.467–8.400s |
-| Terminal | 504 | 176 | 8.400–11.333s |
-| Voice | 680 | 144 | 11.333–13.733s |
-| Notes | 824 | 144 | 13.733–16.133s |
-| Reminders | 968 | 160 | 16.133–18.800s |
+Cumulative frames: `[0,274,469,720,971,1177,1383,1611]`.
 
-`shots.json` records the exact 60fps cut schedule. Original frame durations [144,102,132,132,108,108,120] become [192,136,176,176,144,144,160]. Media rates become 0.75× for all beats except Chat, which becomes 1.05× instead of 1.4×. These new output durations/rates consume the same original raw time windows.
+| Beat | Start frame | Duration frames | Film time | Raw playback rate |
+| --- | ---: | ---: | --- | --- |
+| Board | 0 | 274 | 0.000000–4.566667s | 0.525547445255× |
+| In progress | 274 | 195 | 4.566667–7.816667s | 0.523076923077× |
+| Chat | 469 | 251 | 7.816667–12.000000s | 0.736254980080× |
+| Terminal | 720 | 251 | 12.000000–16.183333s | 0.525896414343× |
+| Voice | 971 | 206 | 16.183333–19.616667s | 0.524271844660× |
+| Notes | 1177 | 206 | 19.616667–23.050000s | 0.524271844660× |
+| Reminders | 1383 | 228 | 23.050000–26.850000s | 0.526315789474× |
 
-## Full-app camera contract
+Each source rate is `unchangedRawWindow / (newFrameDuration / 60)`. Every GSAP camera/label duration and local start time is multiplied by `newFrameDuration / previousFrameDuration`. Easing and focus targets are unchanged. This preserves synchronization while keeping exact raw source windows despite the one-frame cut rounding.
 
-Every clip retains the complete 1900 × 980 application crop `1900:980:0:40`, removing only the native OS titlebar. Native product pixels are retained inside 1900 × 1070 graphite padding. No product sidebar, control, column or conversation is permanently cropped.
+## Preserved content and framing
 
-Every scene uses `object-fit: contain`. At overview `{xPercent:0,yPercent:0,scale:1}`, the complete app fits inside the 1920 × 1008 product viewport above the 72px label rail. Focus is the same reversible wrapper transform as the previous verified film, with unchanged `power2.inOut` easing and targets. Each focused shot returns to the full app before its cut; Board stays wide through the entire drag.
+The seven actions remain the physical Done → Now drag/drop, native running blue progress, actual built-in Chat exchange, actual Terminal Chat, Listening/timer/waveform, rich Markdown note and scheduled standalone workspace reminder. Board stays wide through the whole drag. All other scenes establish the whole app, temporarily focus on the action, then pull back before the cut. The note’s navigation is hidden only by the app’s own recorded Focus mode.
 
-Local camera timings below are rounded for reading; scene HTML retains the scaled values.
+All normalized clips preserve the complete 1900 × 980 product image using only the OS-titlebar crop `1900:980:0:40`, in 1900 × 1070 graphite padding. `object-fit: contain` preserves the complete app at overview scale. No source window, crop, camera target, UI content or feature order changes. No recording, app call, model/provider call or fabricated UI. Silence remains intentional for the muted hero.
 
-| Beat | Unchanged focus (x,y,scale) | Slower zoom | Slower pullback |
-| --- | --- | --- | --- |
-| Board | Full app throughout | None | None |
-| In progress | 17%,49%,2.35× | 0.187–0.720s | 1.413–2.000s |
-| Chat | 60%,48%,1.70× | 0.240–0.880s | 2.027–2.667s |
-| Terminal | 49%,49%,1.50× | 0.240–0.880s | 2.027–2.667s |
-| Voice | 60%,89%,2.50× | 0.187–0.760s | 1.520–2.133s |
-| Notes | 50%,28%,1.85× | 0.187–0.760s | 1.520–2.133s |
-| Reminders | 52%,23%,2.05× | 0.213–0.827s | 1.760–2.400s |
+## Bounded verification
 
-Label arrival changes from 0.12 to 0.16 seconds. The note’s native Focus mode still hides its own navigation during the same source action; the editorial framing continues to preserve the complete recorded window.
-
-## Required actions and verification
-
-Retain the actual Done → Now card drag/drop, native running blue progress, real built-in Chat exchange, actual Terminal Chat, native Listening/waveform, rich Markdown note and scheduled standalone workspace reminder. No new capture, app/model call, task creation or fabricated UI. Silence remains intentional for the muted-autoplay hero.
-
-Verify raw source hashes/windows/crops unchanged; every media rate is its previous value ×0.75; all durations and camera/label/cut times are their previous value ÷0.75. Run lint and browser-backed composition checks, inspect representative full-app/focus/pullback frames, render H.264, verify 18.8 seconds/1128 frames at60fps, and fully decode the MP4. The poster remains a full-app establishing frame at the correspondingly retimed opening instant.
+Verify all raw hashes/windows/crops against 83a1719, exact per-shot media/camera ratios, 1611 normalized frames and contiguous cut times. Run lint and browser-backed Hyperframes checks, render, fully decode the MP4, inspect representative full-app/focus/pullback frames, and generate a full-app opening poster. The same 5187 source preview remains running.

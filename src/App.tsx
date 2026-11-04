@@ -80,15 +80,29 @@ export default function App() {
         <section className="story-section context-section section-shell" aria-labelledby="context-heading">
           <Reveal>
             <div className="context-intro">
-              <h2 id="context-heading">Keep the notes.<br />Remember the next step.</h2>
+              <h2 id="context-heading">Keep the thinking<br />close to the work.</h2>
               <p>
-                Turn a useful moment into a Markdown note. Set a reminder,
-                then return to the work with the context still there.
+                Turn a useful moment into a Markdown note. Keep decisions,
+                ideas, and project details together in your shared library.
               </p>
             </div>
             <div className="story-stage context-stage">
               <div className="note-window"><ProductImage view="focus" /></div>
-              <div className="reminder-window">
+            </div>
+          </Reveal>
+        </section>
+
+        <section id="reminders" className="story-section reminders-section section-shell" aria-labelledby="reminders-heading">
+          <Reveal className="story-row reminders-story">
+            <div className="story-copy">
+              <h2 id="reminders-heading">A reminder.<br />With the reason why.</h2>
+              <p>
+                Leave a nudge for your next step. Return to the right project
+                and worktree, with the context ready when you are.
+              </p>
+            </div>
+            <div className="story-stage reminders-stage">
+              <div className="reminder-detail">
                 <img
                   src="/images/hive-reminder-dark.webp"
                   alt="A scheduled Hive reminder with its project and worktree context."
@@ -96,11 +110,11 @@ export default function App() {
                 />
               </div>
             </div>
-            <div className="context-close">
-              <p>A little less switching. A little more making.</p>
-              <DownloadButton />
-            </div>
           </Reveal>
+          <div className="context-close">
+            <p>A little less switching. A little more making.</p>
+            <DownloadButton />
+          </div>
         </section>
       </main>
       <footer className="site-footer section-shell">

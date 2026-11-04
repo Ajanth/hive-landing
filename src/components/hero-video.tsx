@@ -164,60 +164,6 @@ export function HeroVideo() {
 
   return (
     <figure className="hero-film" ref={film} data-playing={playing} aria-label="Hive product demo">
-      <div className="film-stage">
-        <div className="film-screen">
-          <video
-            ref={video}
-            src={
-              sourceEnabled
-                ? `${VIDEO_URL}${retry ? `?retry=${retry}` : ""}`
-                : undefined
-            }
-            poster={POSTER_URL}
-            width={1920}
-            height={1080}
-            preload={sourceEnabled ? "auto" : "none"}
-            muted
-            loop
-            playsInline
-            aria-label="Hive product walkthrough"
-            aria-describedby={description}
-            onCanPlay={synchronizePlayback}
-            onLoadedMetadata={synchronizeScene}
-            onTimeUpdate={synchronizeScene}
-            onSeeking={synchronizeScene}
-            onSeeked={synchronizeScene}
-            onPlay={() => {
-              synchronizeScene()
-              setPlaying(true)
-            }}
-            onPause={() => setPlaying(false)}
-            onError={() => {
-              setFailed(true)
-              setPlaying(false)
-            }}
-          >
-            <track
-              kind="captions"
-              src={CAPTIONS_URL}
-              srcLang="en"
-              label="English"
-            />
-            <a href={VIDEO_URL}>Open the Hive product demo</a>
-          </video>
-          {failed && (
-            <div className="film-error" role="status">
-              <p>The product demo couldn’t load.</p>
-              <div>
-                <button onClick={retryVideo}>Try again</button>
-                <a href={VIDEO_URL} target="_blank" rel="noreferrer">
-                  Open video
-                </a>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
       <figcaption className="film-caption" aria-live="off">
         <div className="film-description">
           <div className="film-scene-meta">
@@ -278,6 +224,61 @@ export function HeroVideo() {
           )}
         </div>
       </figcaption>
+      <div className="film-stage">
+        <div className="film-screen">
+          <video
+            ref={video}
+            src={
+              sourceEnabled
+                ? `${VIDEO_URL}${retry ? `?retry=${retry}` : ""}`
+                : undefined
+            }
+            poster={POSTER_URL}
+            width={1920}
+            height={1080}
+            preload={sourceEnabled ? "auto" : "none"}
+            muted
+            loop
+            playsInline
+            aria-label="Hive product walkthrough"
+            aria-describedby={description}
+            onCanPlay={synchronizePlayback}
+            onLoadedMetadata={synchronizeScene}
+            onTimeUpdate={synchronizeScene}
+            onSeeking={synchronizeScene}
+            onSeeked={synchronizeScene}
+            onPlay={() => {
+              synchronizeScene()
+              setPlaying(true)
+            }}
+            onPause={() => setPlaying(false)}
+            onError={() => {
+              setFailed(true)
+              setPlaying(false)
+            }}
+          >
+            <track
+              kind="captions"
+              src={CAPTIONS_URL}
+              srcLang="en"
+              label="English"
+            />
+            <a href={VIDEO_URL}>Open the Hive product demo</a>
+          </video>
+          {failed && (
+            <div className="film-error" role="status">
+              <p>The product demo couldn’t load.</p>
+              <div>
+                <button onClick={retryVideo}>Try again</button>
+                <a href={VIDEO_URL} target="_blank" rel="noreferrer">
+                  Open video
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
       {fullscreenFailed && (
         <p className="film-notice" role="status">
           Use the video’s native controls to expand the film.
