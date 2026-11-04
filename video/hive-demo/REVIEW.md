@@ -1,19 +1,16 @@
-# 75% playback review
+# Another30% slowdown review
 
-Verified 2026-11-03. The full-app film is uniformly slowed to 75% of its previous speed: 18.8 seconds,1128frames,60fps. Exact scene frame durations are [192,136,176,176,144,144,160]. The seven original source masters, hashes, raw windows, full-app crops, focus targets and easing are unchanged. Media rates are previous×0.75 (Chat1.05×; all others0.75×); every camera, label, hold and cut time is previous÷0.75.
+Verified 2026-11-04. The prior18.8-second full-app film is slowed by approximately another30% to26.85 seconds,1611frames,60fps. Cumulative cuts are [0,274,469,720,971,1177,1383,1611]; per-scene frames are [274,195,251,251,206,206,228]. This whole-frame schedule differs from exact0.70× playback by less than one frame.
 
-Verification:
+Raw source hashes, sourceStart/sourceWindow values, crops and output dimensions are unchanged against83a1719. Per-shot media rates equal rawWindow/(newFrames/60); every camera and label timing scales by newFrames/previousFrames. Focus targets, easing and complete-app framing are unchanged. No recording, app or provider call was performed.
 
-- Programmatic comparison against `8225a41` confirms unchanged raw hashes/windows/crops/dimensions, uniformly scaled media/camera/label timing, unchanged focus targets and exact normalized60fps frame counts totaling1128.
-- Ingest syntax and Git whitespace checks pass. Hyperframes lint reports zero errors/warnings.
-- Browser-backed Hyperframes check passes: `ok:true`, `browserSkipped:false`. Its expected `film_silent` craft warning reflects the intentionally silent muted-autoplay hero.
-- Six representative source snapshots and the corresponding encoded frames were inspected at retimed establishing, drop, running, Chat, Voice and final pullback instants. Full-app framing and focus/pullback geometry are preserved. Evidence: `.hyperframes/artifacts/slow-framing/contact-sheet.jpg` and `.hyperframes/artifacts/encoded-slow/representative.png`.
-- Hyperframes delivery render passes. FFprobe confirms H.264,yuv420p,1920×1080,60/1fps,1128frames,18.800000s,video-only. Full FFmpeg decode is clean. `moov` precedes `mdat` for fast-start playback.
-- Poster remains an encoded full-app opening frame, retimed from0.05s to approximately0.066667s.
+Verification: ingest syntax, Git whitespace and Hyperframes lint pass. Browser-backed Hyperframes check passes (`ok:true`,`browserSkipped:false`); the expected `film_silent` warning reflects the intentionally silent hero. Exact source/frame/timing comparisons pass. Six representative source and encoded frames retain the wide Board/drop, running and Chat focus, Voice control and final full-app overview. Evidence is in `.hyperframes/artifacts/slow70-framing/contact-sheet.jpg` and `.hyperframes/artifacts/encoded70/representative.png`.
+
+The Hyperframes delivery render passes. FFprobe confirms H.264,yuv420p,1920×1080,60/1fps,1611frames,26.850000s,video-only. Full FFmpeg decode is clean; `moov` precedes `mdat` for fast-start playback. The poster remains the full-app opening frame at its correspondingly retimed instant.
 
 | Artifact | Bytes | SHA-256 |
 | --- | ---: | --- |
-| `renders/hive-product-demo.mp4` | 7,806,164 | `75d1b6fa10fc2e09c1fa81efae22a03a01ba82999c57744dbd2d092f7757ae76` |
-| `renders/hive-product-demo-poster.webp` | 28,856 | `2463f0af5c71dbe737d26d055af55d4a8d08088b876571f7bc55ffb0910cb57b` |
+| `renders/hive-product-demo.mp4` | 10,407,521 | `bacafb3f5ec3ad1981f8187329da276c36aada613df9dda2a83b1a70ffd19867` |
+| `renders/hive-product-demo-poster.webp` | 29,000 | `4a7e004bcadc43d7309f4d7c52fbb1cc1677ea4243fce8264b093d1fb1acaf53` |
 
-The same editable source preview remains running at http://localhost:5187/#project/hive-demo. No recording, Hive/model call or new media generation was performed. The integration owner copies the final MP4 and poster into the landing page. Local source remains editable in the preview or HyperFrames desktop app.
+The same editable source preview remains running at http://localhost:5187/#project/hive-demo. The integration owner copies final media to the landing page and updates external captions/VTT against the exact frame schedule above. The source remains editable in the preview or HyperFrames desktop app.

@@ -2,7 +2,7 @@
 
 A dark-only landing page for [Hive](https://github.com/Ajanth/hive-public), a local macOS workspace for OpenCode conversations, code, and context.
 
-Four focused sections introduce Hive through the approved product film, Board, Chat and Terminal, then Notes and Reminders. A moving indigo paint wash frames the product; the footer contains only text and links. Hive’s navigation brand stays. See [DESIGN.md](DESIGN.md) for the design decisions.
+Five focused sections introduce Hive through the product film, Board, Chat and Terminal, Notes, then Reminders. A moving indigo paint wash frames the product; the footer contains only text and links. Hive’s navigation brand stays. See [DESIGN.md](DESIGN.md) for the design decisions.
 
 ## Development
 
@@ -15,9 +15,9 @@ Use Node 22.18 or later. Run `npm test`, `npm run lint`, and `npm run build` bef
 
 ## Product film and interaction
 
-The 18.8-second, 60fps film and WebP poster are ready in `public/videos/`. Seven quick beats show a real card drag, running thread progress, built-in Chat, Terminal Chat, voice recording, a note, and a reminder. The film runs at 0.75× the previous speed, with full-app views and smooth focus zooms preserving the workspace around each action. Its editable source and local render instructions are in [video/hive-demo/README.md](video/hive-demo/README.md).
+The 26.85-second, 60fps film and WebP poster are ready in `public/videos/`. Seven quick beats show a real card drag, running thread progress, built-in Chat, Terminal Chat, voice recording, a note, and a reminder. The film runs about 30% slower than the previous 18.8-second cut, with full-app views and smooth focus zooms preserving the workspace around each action. Its editable source and local render instructions are in [video/hive-demo/README.md](video/hive-demo/README.md).
 
-`src/App.tsx` owns page content. `src/components/hero-video.tsx` owns a single 16:9 video element using `/videos/hive-product-demo.mp4` and `/videos/hive-product-demo-poster.webp`. The production composition uses real Hive recordings and is authored in Hyperframes. A complete sentence follows each of the seven scenes, synchronized to the exact 60fps cut points through `src/lib/demo-captions.ts`. Captions follow seeking, replay, and looping. They reserve a stable height and avoid unsolicited screen-reader announcements; a static accessible description identifies the demo work. A WebVTT track provides the same sentences for native caption controls.
+`src/App.tsx` owns page content. `src/components/hero-video.tsx` owns a single 16:9 video element using `/videos/hive-product-demo.mp4` and `/videos/hive-product-demo-poster.webp`. The production composition uses real Hive recordings and is authored in Hyperframes. A scene title and complete sentence appear above the video for each of the seven scenes, synchronized to the exact 60fps cut points through `src/lib/demo-captions.ts`. Captions follow seeking, replay, and looping. They reserve a stable height and avoid unsolicited screen-reader announcements; a static accessible description identifies the demo work. A WebVTT track provides the same sentences for native caption controls.
 
 The player provides keyboard-accessible Play/Pause, Replay, and fullscreen controls. It loads its source only near the viewport and plays automatically only while visible and motion/data preferences allow it. Reduced Motion and Save-Data leave the poster visible until the user presses Play. Offscreen or hidden-tab playback pauses. Autoplay rejection leaves the explicit Play control available; failed media has a retry and direct-video link. Expanding reuses the same video element. Pausing the film also pauses both background wash animations; offscreen playback pauses them together.
 
