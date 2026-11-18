@@ -118,9 +118,13 @@ export default function App() {
         </section>
       </main>
       <footer className="site-footer section-shell">
-        <p>Made for your Mac. Your history stays local.</p>
+        <p>
+          Hive stores thread history on your host. Connected services and AI
+          providers can receive content when you use their features.
+        </p>
         <div>
-          <a href={`${GITHUB_URL}#security--privacy`} target="_blank" rel="noreferrer">Privacy</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
           <a href={GITHUB_URL} target="_blank" rel="noreferrer">GitHub</a>
           <a href={`${GITHUB_URL}/releases`} target="_blank" rel="noreferrer">Releases</a>
           <a href={`${GITHUB_URL}/issues`} target="_blank" rel="noreferrer">Feedback</a>
