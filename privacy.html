@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="How Hive handles information across local workspaces, Linear, AI providers, its website, and support." />
+    <meta name="theme-color" content="#111113" />
+    <link rel="icon" type="image/png" href="/hive-favicon.png" />
+    <link rel="stylesheet" href="/src/legal.css" />
+    <title>Privacy Notice | Hive</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header section-shell legal-header">
+      <a class="wordmark" href="/" aria-label="Hive home"><img src="/hive-app-icon.webp" alt="" width="28" height="28" />Hive</a>
+      <nav aria-label="Legal navigation"><a href="/privacy" aria-current="page">Privacy</a><a href="/terms">Terms</a></nav>
+    </header>
+    <main id="main" class="legal-document section-shell">
+      <h1>Privacy Notice</h1>
+      <p class="legal-date">Effective 18 November 2026</p>
+      <p>I’m Ajanth Kathirkamu. I maintain Hive and am responsible for personal information processed to run this website and respond to support requests. You can reach me at <a href="mailto:ajanth2newearth@gmail.com">ajanth2newearth@gmail.com</a>.</p>
+
+      <h2>Your workspace and connected services</h2>
+      <p>Hive runs coding agents in an environment on a computer you choose. That host stores thread history, settings, drafts, and related workspace records. Your browser or app can also save preferences, drafts, and cached display data on its own device. If you connect another device or a remote environment, information travels between those devices and the selected host. I do not operate a Hive relay.</p>
+      <p>When you send a prompt, the coding agent and its configured AI services can receive the prompt, conversation context, attachments, files, and tool results used for that work. Some Hive features also send context to a configured AI service to generate text such as a title, branch name, recap, or pull request description. The destination can depend on your settings and available providers. Hive 5.0.0 can send an issue draft to an AI service for automatic naming. Review your agent, model, and text-generation settings before using work information.</p>
+      <p>You and your organization decide what to connect and which content to submit. The providers you choose handle information under their own agreements and settings. Their retention, training, and international-processing practices can vary by account, plan, model, endpoint, and feature.</p>
+      <ul>
+        <li><a href="https://opencode.ai/legal/privacy-policy">OpenCode’s Privacy Policy</a> explains its website, model gateway, and hosted-service processing.</li>
+        <li><a href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan">Codex plan and data controls</a> explains how data use depends on your OpenAI account and settings.</li>
+        <li><a href="https://docs.github.com/en/copilot/how-tos/manage-your-account/manage-policies">GitHub Copilot account policies</a> explain personal-account controls, including model training.</li>
+      </ul>
+
+      <h2>Connecting Linear</h2>
+      <p>Connecting Linear authorizes Hive to request workspace information from <a href="https://linear.app/docs/mcp">Linear’s hosted MCP service</a>. Hive initially requests read access. Issue editing requires an additional read-and-write authorization. Depending on what you open, Hive can retrieve workspace and team information, issue titles and descriptions, assignees and other people, comments, projects, milestones, and documents. Supported edits and comments are sent back to Linear when you use those actions.</p>
+      <p>Hive saves the connection’s access and refresh credentials in a restricted directory on your host. Selected Linear views can be cached in the client’s browser storage. The current display cache uses a 15-minute freshness limit. An inactive client can retain stale entries until it next accesses the cache or you clear its stored data.</p>
+      <p>Linking an issue saves its workspace identifier, issue key, and URL with the Hive thread. Choosing to start work from an issue can copy its key, title, link, and available description into an editable draft. You can review and remove information before sending. Sending shares the remaining draft with the coding agent and its configured AI services. Hive versions and naming settings can affect what is sent for automatic naming.</p>
+      <p>Disconnecting an established connection removes Hive’s saved credential. You can also revoke the grant in Linear under <strong>Settings → Security &amp; Access → Authorized applications</strong>. Previously saved issue links can reappear after reconnection. Messages, agent sessions, exports, backups, and edits already made in Linear have their own deletion controls and retention rules.</p>
+      <p>Read <a href="https://linear.app/privacy">Linear’s Privacy Policy</a> and <a href="https://linear.app/terms">Terms of Service</a> for Linear’s processing. The same need to review a service’s permissions and terms applies when you configure another MCP server or integration.</p>
+
+      <h2>This website, downloads, and support</h2>
+      <p>This website is hosted on Cloudflare Pages. Visiting it sends ordinary request information, such as your IP address, requested URL, browser information, and request time, to the hosting service to deliver and protect the site. The site code includes no advertising or analytics trackers. Cloudflare handles hosting and security information under its <a href="https://www.cloudflare.com/privacypolicy/">Privacy Policy</a>.</p>
+      <p>The home page requests the public release manifest from GitHub Pages to show the latest download. Downloads, update checks, releases, issues, and discussions use GitHub services. Those requests disclose network information to GitHub. Information you post in the public issue tracker or discussions is visible publicly. See <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub’s Privacy Statement</a>.</p>
+      <p>If you email support, I receive your message and any attachments in my Gmail mailbox. If you report a problem through GitHub, I can read what you post there. This can include your name, email address, messages, logs, screenshots, or files. Review those materials and remove credentials or unrelated personal information before sharing them. For a private security report, email me directly instead of opening a public issue.</p>
+      <p>External product telemetry is off by default in current Hive builds. Optional diagnostics can send information to a receiver you or your administrator configures. Error messages and traces can include details of the operation being handled. Check the destination and its access rules when enabling exports.</p>
+
+      <h2>Purposes and legal bases</h2>
+      <p>I use information from website requests to serve and secure the site. I use the information you send me to answer your request and investigate any problem you report. Where the GDPR applies, the legal bases are legitimate interests in operating a secure website and answering requests, performance of a contract where the requested service requires it, and compliance with applicable legal obligations.</p>
+      <p>For workspace processing, the organization or person operating the environment determines the purpose, legal basis, and authorized recipients. A user connecting a work account should have their organization’s permission to use the integration and send its content to the selected services. Issue descriptions and comments can include personal information about other people.</p>
+
+      <h2>Retention, deletion, and access</h2>
+      <p>Workspace records remain on the host or client until you use the relevant deletion controls or remove the stored data. Archives, event history, agent transcripts, files, and backups can contain additional copies. Unlinking or disconnecting an integration affects the connection or link, while content already saved in a conversation follows that conversation’s lifecycle. For provider-held copies, use that provider’s controls or contact it directly.</p>
+      <p>Cloudflare and GitHub manage their service logs under the policies linked above. Support email and attachments remain in the mailbox until deleted. The need to resolve or follow up on your particular request, and any legally required recordkeeping, determine how long support information is needed. To request deletion, email me with the subject or approximate date so I can locate the correspondence. See <a href="https://policies.google.com/privacy">Google’s Privacy Policy</a> for its handling of Gmail data.</p>
+      <p>For information I hold, you can request access, correction, deletion, or restriction, object to processing, and request portability where applicable. Where processing relies on consent, you can withdraw that consent. You can complain to the data protection authority responsible for your jurisdiction. Email the contact above with enough information to identify your request. I may need to verify your identity to respond. For data controlled by your organization, host operator, or a connected provider, contact that party.</p>
+
+      <h2>International processing and updates</h2>
+      <p>The website, release services, email service, and AI or integration providers you select may process information in other countries. Their applicable privacy notices and customer agreements describe locations and transfer safeguards. When choosing services for an organization, review those arrangements and any required data-processing agreement.</p>
+      <p>This notice may be updated as Hive’s features and services change. The effective date identifies the current version. Changes affecting a connection or data transfer should also be explained in the relevant product flow.</p>
+      <p><a href="/terms">Terms of Use</a> · <a href="/legal">Legal documents</a></p>
+    </main>
+    <footer class="site-footer section-shell legal-footer"><div><a href="/">Hive home</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="https://github.com/Ajanth/hive-public">GitHub</a></div></footer>
+  </body>
+</html>
